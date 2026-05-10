@@ -69,7 +69,11 @@ export default function EventModal({ event, onClose }: Props) {
           {event.expected_visitors && (
             <div className="flex items-start gap-3 text-sm text-gray-600">
               <Users size={16} className="mt-0.5 shrink-0 text-green-500" />
-              <span>예상 방문객: <strong>{event.expected_visitors.toLocaleString()}명</strong></span>
+              <span>일 최대 동시관람객: <strong>
+                {event.expected_visitors >= 10000
+                  ? `${(event.expected_visitors / 10000).toFixed(0)}만명`
+                  : `${event.expected_visitors.toLocaleString()}명`}
+              </strong></span>
             </div>
           )}
         </div>

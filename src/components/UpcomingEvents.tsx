@@ -99,7 +99,7 @@ export default function UpcomingEvents({ events, selectedLocation }: Props) {
                     {event.expected_visitors && (
                       <span className="flex items-center gap-1 text-xs text-gray-500">
                         <Users size={10} className="text-indigo-400" />
-                        {event.expected_visitors >= 10000
+                        일최대&nbsp;{event.expected_visitors >= 10000
                           ? `${(event.expected_visitors / 10000).toFixed(0)}만명`
                           : `${event.expected_visitors.toLocaleString()}명`}
                       </span>
@@ -116,9 +116,8 @@ export default function UpcomingEvents({ events, selectedLocation }: Props) {
 
               {/* D-Day 숫자 */}
               <div className="text-right shrink-0">
-                <p className="text-[10px] text-gray-400">D-</p>
-                <p className={`text-lg font-bold ${isToday ? 'text-gray-400' : 'text-indigo-600'}`}>
-                  {dLabel}
+                <p className={`text-base font-bold whitespace-nowrap ${isToday ? 'text-gray-400' : 'text-indigo-600'}`}>
+                  {isToday ? '끝' : `D-${dLabel}`}
                 </p>
               </div>
             </button>

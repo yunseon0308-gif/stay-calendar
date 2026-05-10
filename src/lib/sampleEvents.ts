@@ -1,6 +1,7 @@
 import { Event } from '@/types/event';
 
 // 샘플 이벤트 데이터 (Supabase 연결 전 미리보기용)
+// expected_visitors = 일 최대 동시관람객 수 기준
 export const SAMPLE_EVENTS: Event[] = [
   // ── 콘서트 ──────────────────────────────
   {
@@ -12,7 +13,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '잠실올림픽주경기장',
     location: '서울',
     district: '잠실',
-    expected_visitors: 100000,
+    expected_visitors: 70000,   // 잠실올림픽주경기장 수용 인원
     description: '방탄소년단 월드투어 서울 공연',
   },
   {
@@ -24,7 +25,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '고척스카이돔',
     location: '서울',
     district: '고척',
-    expected_visitors: 60000,
+    expected_visitors: 20000,   // 고척스카이돔 수용 인원
   },
   {
     id: '3',
@@ -35,7 +36,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: 'KSPO DOME',
     location: '서울',
     district: '잠실',
-    expected_visitors: 40000,
+    expected_visitors: 15000,   // KSPO DOME 수용 인원
   },
   {
     id: '4',
@@ -46,7 +47,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '사직실내체육관',
     location: '부산',
     district: '사직',
-    expected_visitors: 30000,
+    expected_visitors: 8000,    // 사직실내체육관 수용 인원
   },
   {
     id: '16',
@@ -57,7 +58,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '인스파이어 아레나',
     location: '인천',
     district: '영종도',
-    expected_visitors: 45000,
+    expected_visitors: 15000,   // 인스파이어 아레나 수용 인원
   },
   {
     id: '18',
@@ -68,7 +69,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '고척스카이돔',
     location: '서울',
     district: '고척',
-    expected_visitors: 50000,
+    expected_visitors: 20000,   // 고척스카이돔 수용 인원
   },
   // ── 불꽃놀이 ─────────────────────────────
   {
@@ -80,7 +81,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '여의도한강공원',
     location: '서울',
     district: '여의도',
-    expected_visitors: 1000000,
+    expected_visitors: 1000000, // 단일 행사, 총 = 일최대
     description: '매년 100만명 이상 방문하는 서울 대표 불꽃축제',
   },
   {
@@ -92,7 +93,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '광안리해수욕장',
     location: '부산',
     district: '수영구',
-    expected_visitors: 500000,
+    expected_visitors: 500000,  // 단일 행사, 총 = 일최대
   },
   {
     id: '7',
@@ -103,7 +104,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '영일대해수욕장',
     location: '경북',
     district: '포항',
-    expected_visitors: 200000,
+    expected_visitors: 70000,   // 일 최대 동시관람객 (3일 행사)
   },
   // ── 축제 ─────────────────────────────────
   {
@@ -115,7 +116,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '올림픽공원 88잔디마당',
     location: '서울',
     district: '잠실',
-    expected_visitors: 80000,
+    expected_visitors: 30000,   // 일 최대 동시관람객
   },
   {
     id: '9',
@@ -126,7 +127,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '송도달빛축제공원',
     location: '인천',
     district: '송도',
-    expected_visitors: 120000,
+    expected_visitors: 40000,   // 일 최대 동시관람객
   },
   {
     id: '10',
@@ -137,7 +138,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '지산 포레스트 리조트',
     location: '경기',
     district: '이천',
-    expected_visitors: 100000,
+    expected_visitors: 35000,   // 일 최대 동시관람객
   },
   {
     id: '11',
@@ -148,7 +149,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '영화의전당',
     location: '부산',
     district: '해운대',
-    expected_visitors: 300000,
+    expected_visitors: 30000,   // 일 최대 동시관람객
   },
   {
     id: '12',
@@ -159,7 +160,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '엑스포 과학공원',
     location: '대전',
     district: '유성구',
-    expected_visitors: 80000,
+    expected_visitors: 20000,   // 일 최대 동시관람객
   },
   {
     id: '17',
@@ -170,7 +171,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '청계천 일대',
     location: '서울',
     district: '종로',
-    expected_visitors: 500000,
+    expected_visitors: 30000,   // 일 최대 동시관람객
   },
   // ── 스포츠 (대형 경기만) ──────────────────
   {
@@ -182,7 +183,7 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '잠실야구장',
     location: '서울',
     district: '잠실',
-    expected_visitors: 250000,
+    expected_visitors: 25000,   // 잠실야구장 수용 인원
   },
   {
     id: '14',
@@ -193,6 +194,6 @@ export const SAMPLE_EVENTS: Event[] = [
     venue: '서울월드컵경기장',
     location: '서울',
     district: '상암',
-    expected_visitors: 60000,
+    expected_visitors: 60000,   // 서울월드컵경기장 수용 인원
   },
 ];
