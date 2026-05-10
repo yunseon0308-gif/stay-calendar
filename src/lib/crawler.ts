@@ -24,7 +24,7 @@ function mapKopisGenre(genreCode: string): EventCategory {
     'CCCE': 'concert',  // 뮤지컬
     'CCCF': 'festival', // 복합
     'GGGA': 'sports',
-    'BBBC': 'exhibition',
+    'BBBC': 'other',   // 전시 → 숙박 영향 낮아 'other' 처리
   };
   return map[genreCode] || 'other';
 }

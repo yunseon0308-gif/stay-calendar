@@ -11,6 +11,7 @@ const EMPTY_FORM: Omit<Event, 'id' | 'created_at'> = {
   date_end: '',
   venue: '',
   location: '서울',
+  district: '',
   expected_visitors: undefined,
   source_url: '',
   description: '',
@@ -162,6 +163,15 @@ export default function AdminPage() {
                 </select>
               </div>
               <div>
+                <label className="text-xs font-medium text-gray-600 mb-1 block">상세 지역 (선택)</label>
+                <input
+                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-indigo-400"
+                  value={form.district || ''}
+                  onChange={e => setForm(f => ({ ...f, district: e.target.value }))}
+                  placeholder="예: 잠실, 여의도, 해운대"
+                />
+              </div>
+              <div>
                 <label className="text-xs font-medium text-gray-600 mb-1 block">시작일 *</label>
                 <input
                   type="date"
@@ -255,7 +265,7 @@ export default function AdminPage() {
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-gray-800 truncate">{event.title}</p>
                     <p className="text-xs text-gray-400 mt-0.5">
-                      {event.date_start} ~ {event.date_end} · {event.location} · {event.venue}
+                      {event.date_start} ~ {event.date_end} · {event.district ? `${event.location} / ${event.district}` : event.location} · {event.venue}
                     </p>
                   </div>
                   <div className="flex items-center gap-3 ml-3">

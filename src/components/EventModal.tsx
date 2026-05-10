@@ -60,7 +60,9 @@ export default function EventModal({ event, onClose }: Props) {
             <MapPin size={16} className="mt-0.5 shrink-0 text-red-500" />
             <span>
               {event.venue}
-              <span className="ml-1 text-gray-400">({event.location})</span>
+              <span className="ml-1 text-gray-400">
+                ({event.district ? `${event.location} / ${event.district}` : event.location})
+              </span>
             </span>
           </div>
 

@@ -2,7 +2,7 @@ import { Event } from '@/types/event';
 
 // 샘플 이벤트 데이터 (Supabase 연결 전 미리보기용)
 export const SAMPLE_EVENTS: Event[] = [
-  // 콘서트
+  // ── 콘서트 ──────────────────────────────
   {
     id: '1',
     title: 'BTS 월드투어 콘서트',
@@ -11,6 +11,7 @@ export const SAMPLE_EVENTS: Event[] = [
     date_end: '2026-06-15',
     venue: '잠실올림픽주경기장',
     location: '서울',
+    district: '잠실',
     expected_visitors: 100000,
     description: '방탄소년단 월드투어 서울 공연',
   },
@@ -22,6 +23,7 @@ export const SAMPLE_EVENTS: Event[] = [
     date_end: '2026-05-25',
     venue: '고척스카이돔',
     location: '서울',
+    district: '고척',
     expected_visitors: 60000,
   },
   {
@@ -32,6 +34,7 @@ export const SAMPLE_EVENTS: Event[] = [
     date_end: '2026-07-06',
     venue: 'KSPO DOME',
     location: '서울',
+    district: '잠실',
     expected_visitors: 40000,
   },
   {
@@ -40,11 +43,34 @@ export const SAMPLE_EVENTS: Event[] = [
     category: 'concert',
     date_start: '2026-08-16',
     date_end: '2026-08-17',
-    venue: '부산 사직실내체육관',
+    venue: '사직실내체육관',
     location: '부산',
+    district: '사직',
     expected_visitors: 30000,
   },
-  // 불꽃놀이
+  {
+    id: '16',
+    title: 'Stray Kids 월드투어',
+    category: 'concert',
+    date_start: '2026-05-30',
+    date_end: '2026-05-31',
+    venue: '인스파이어 아레나',
+    location: '인천',
+    district: '영종도',
+    expected_visitors: 45000,
+  },
+  {
+    id: '18',
+    title: '에스파(aespa) 콘서트',
+    category: 'concert',
+    date_start: '2026-05-16',
+    date_end: '2026-05-17',
+    venue: '고척스카이돔',
+    location: '서울',
+    district: '고척',
+    expected_visitors: 50000,
+  },
+  // ── 불꽃놀이 ─────────────────────────────
   {
     id: '5',
     title: '한화 서울세계불꽃축제',
@@ -53,6 +79,7 @@ export const SAMPLE_EVENTS: Event[] = [
     date_end: '2026-10-04',
     venue: '여의도한강공원',
     location: '서울',
+    district: '여의도',
     expected_visitors: 1000000,
     description: '매년 100만명 이상 방문하는 서울 대표 불꽃축제',
   },
@@ -64,6 +91,7 @@ export const SAMPLE_EVENTS: Event[] = [
     date_end: '2026-11-01',
     venue: '광안리해수욕장',
     location: '부산',
+    district: '수영구',
     expected_visitors: 500000,
   },
   {
@@ -74,9 +102,10 @@ export const SAMPLE_EVENTS: Event[] = [
     date_end: '2026-08-03',
     venue: '영일대해수욕장',
     location: '경북',
+    district: '포항',
     expected_visitors: 200000,
   },
-  // 축제
+  // ── 축제 ─────────────────────────────────
   {
     id: '8',
     title: '서울 재즈 페스티벌',
@@ -85,6 +114,7 @@ export const SAMPLE_EVENTS: Event[] = [
     date_end: '2026-05-24',
     venue: '올림픽공원 88잔디마당',
     location: '서울',
+    district: '잠실',
     expected_visitors: 80000,
   },
   {
@@ -93,8 +123,9 @@ export const SAMPLE_EVENTS: Event[] = [
     category: 'festival',
     date_start: '2026-08-01',
     date_end: '2026-08-03',
-    venue: '인천 송도달빛축제공원',
+    venue: '송도달빛축제공원',
     location: '인천',
+    district: '송도',
     expected_visitors: 120000,
   },
   {
@@ -105,6 +136,7 @@ export const SAMPLE_EVENTS: Event[] = [
     date_end: '2026-07-27',
     venue: '지산 포레스트 리조트',
     location: '경기',
+    district: '이천',
     expected_visitors: 100000,
   },
   {
@@ -115,6 +147,7 @@ export const SAMPLE_EVENTS: Event[] = [
     date_end: '2026-10-10',
     venue: '영화의전당',
     location: '부산',
+    district: '해운대',
     expected_visitors: 300000,
   },
   {
@@ -125,50 +158,8 @@ export const SAMPLE_EVENTS: Event[] = [
     date_end: '2026-10-26',
     venue: '엑스포 과학공원',
     location: '대전',
+    district: '유성구',
     expected_visitors: 80000,
-  },
-  // 스포츠
-  {
-    id: '13',
-    title: 'KBO 한국시리즈',
-    category: 'sports',
-    date_start: '2026-10-21',
-    date_end: '2026-10-31',
-    venue: '잠실야구장',
-    location: '서울',
-    expected_visitors: 250000,
-  },
-  {
-    id: '14',
-    title: '2026 K리그 챔피언십',
-    category: 'sports',
-    date_start: '2026-11-15',
-    date_end: '2026-11-15',
-    venue: '서울월드컵경기장',
-    location: '서울',
-    expected_visitors: 60000,
-  },
-  // 전시
-  {
-    id: '15',
-    title: '모네: 빛을 그리다 전시',
-    category: 'exhibition',
-    date_start: '2026-05-10',
-    date_end: '2026-08-31',
-    venue: 'DDP 동대문디자인플라자',
-    location: '서울',
-    expected_visitors: 200000,
-  },
-  // 5월 추가
-  {
-    id: '16',
-    title: 'Stray Kids 월드투어',
-    category: 'concert',
-    date_start: '2026-05-30',
-    date_end: '2026-05-31',
-    venue: '인스파이어 아레나',
-    location: '인천',
-    expected_visitors: 45000,
   },
   {
     id: '17',
@@ -178,16 +169,30 @@ export const SAMPLE_EVENTS: Event[] = [
     date_end: '2026-11-23',
     venue: '청계천 일대',
     location: '서울',
+    district: '종로',
     expected_visitors: 500000,
   },
+  // ── 스포츠 (대형 경기만) ──────────────────
   {
-    id: '18',
-    title: '에스파(aespa) 콘서트',
-    category: 'concert',
-    date_start: '2026-05-16',
-    date_end: '2026-05-17',
-    venue: '고척스카이돔',
+    id: '13',
+    title: 'KBO 한국시리즈',
+    category: 'sports',
+    date_start: '2026-10-21',
+    date_end: '2026-10-31',
+    venue: '잠실야구장',
     location: '서울',
-    expected_visitors: 50000,
+    district: '잠실',
+    expected_visitors: 250000,
+  },
+  {
+    id: '14',
+    title: '축구 국가대표 A매치',
+    category: 'sports',
+    date_start: '2026-11-15',
+    date_end: '2026-11-15',
+    venue: '서울월드컵경기장',
+    location: '서울',
+    district: '상암',
+    expected_visitors: 60000,
   },
 ];
