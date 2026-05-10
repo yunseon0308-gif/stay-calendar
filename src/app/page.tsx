@@ -82,8 +82,11 @@ export default function Home() {
 
       {/* 푸터 */}
       <footer className="mt-12 border-t border-gray-100 py-6 text-center text-xs text-gray-400">
-        <p>© 2025 스테이달력 · 공유숙박업 단가관리 필수 플랫폼</p>
+        <p>© 2026 스테이달력 · 공유숙박업 단가관리 필수 플랫폼</p>
         <p className="mt-1">문의: contact@staycalendar.kr</p>
+        <p className="mt-1">
+          <a href="/privacy" className="hover:text-indigo-500 underline">개인정보처리방침</a>
+        </p>
       </footer>
     </div>
   );
