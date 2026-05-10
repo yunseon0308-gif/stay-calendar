@@ -66,18 +66,18 @@ export default function Home() {
           <LocationFilter selected={selectedLocation} onChange={setSelectedLocation} />
         </div>
 
-        {/* 메인 그리드 — 캘린더 : 이벤트 리스트 등높이 */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:items-stretch">
+        {/* 메인 그리드 */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
           {/* 캘린더 (2/3) */}
-          <div className="lg:col-span-2 flex flex-col">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 flex-1">
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
               <Calendar events={SAMPLE_EVENTS} selectedLocation={selectedLocation} />
             </div>
           </div>
 
-          {/* 사이드바 (1/3) — 캘린더와 같은 높이, 내부 스크롤 */}
-          <div className="flex flex-col min-h-0">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 flex-1 overflow-y-auto min-h-0">
+          {/* 사이드바 (1/3) — sticky + 내부 스크롤 */}
+          <div className="lg:sticky lg:top-[73px]">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 overflow-y-auto max-h-[calc(100vh-100px)]">
               <UpcomingEvents events={SAMPLE_EVENTS} selectedLocation={selectedLocation} />
             </div>
           </div>
