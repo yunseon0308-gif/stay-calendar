@@ -31,33 +31,19 @@ export default function Home() {
 
       {/* 상단 안내 배너 */}
       <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 text-center text-sm">
-        💰 행사 시즌 전에 단가 조정하고 수익 극대화하세요!&nbsp;&nbsp;
-        <span className="underline cursor-pointer opacity-80">단가 조정 가이드 보기 →</span>
+        💰 행사 시즌 전에 단가 조정하고 수익 극대화하세요!
       </div>
 
       <main className="max-w-7xl mx-auto px-4 py-6">
 
-        {/* 소개 + 단가 조정 가이드 (상단 2컬럼) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          {/* 스테이달력이란? */}
-          <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm">
-            <h2 className="text-sm font-bold text-gray-800 mb-1.5">📌 스테이달력이란?</h2>
-            <p className="text-xs text-gray-500 leading-relaxed">
-              공연·축제·불꽃놀이 등 대형 행사 일정을 한눈에 볼 수 있는 공유숙박업주 전용 캘린더입니다.
-              주변 숙박 수요가 급증하는 날짜를 미리 파악하고, 단가를 최적화해 수익을 극대화하세요.
-            </p>
-          </div>
-
-          {/* 단가 조정 가이드 */}
-          <div className="bg-indigo-600 rounded-2xl p-4 text-white shadow-sm">
-            <p className="text-sm font-bold mb-2">💡 단가 조정 가이드</p>
-            <ul className="text-xs space-y-1.5 opacity-90">
-              <li>🔴 일최대 30만명↑ 행사 → 3~4배 인상 가능</li>
-              <li>🟡 일최대 5만명↑ 행사 → 2~3배 인상 추천</li>
-              <li>🟢 콘서트·스포츠 전날 → 성수기 단가 적용</li>
-              <li>📆 행사 2개월 전부터 미리 올리세요</li>
-            </ul>
-          </div>
+        {/* 소개 */}
+        <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm mb-6">
+          <h2 className="text-sm font-bold text-gray-800 mb-1.5">📌 스테이달력이란?</h2>
+          <p className="text-xs text-gray-500 leading-relaxed">
+            공연·축제·불꽃놀이 등 대형 행사 일정을 한눈에 볼 수 있는 공유숙박업주 전용 캘린더입니다.
+            주변 숙박 수요가 급증하는 날짜를 미리 파악하고 단가를 최적화해 수익을 극대화하세요.
+            📆 <strong className="text-gray-600">행사 2개월 전부터 미리 단가를 올려두는 것</strong>이 핵심입니다.
+          </p>
         </div>
 
         {/* 지역 필터 */}
