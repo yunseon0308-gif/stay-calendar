@@ -97,18 +97,33 @@ export default function EventModal({ event, onClose }: Props) {
           </p>
         </div>
 
-        {/* 링크 */}
-        {event.source_url && (
+        {/* 링크 버튼 */}
+        <div className="mt-4 flex gap-2">
+          {event.source_url && (
+            <a
+              href={event.source_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold py-2.5 rounded-xl transition-colors"
+            >
+              <ExternalLink size={14} />
+              예매 / 공식 사이트
+            </a>
+          )}
           <a
-            href={event.source_url}
+            href={`https://search.naver.com/search.naver?query=${encodeURIComponent(event.title)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 flex items-center gap-2 text-sm text-indigo-600 hover:underline"
+            className={`flex items-center justify-center gap-1.5 text-sm font-semibold py-2.5 rounded-xl border transition-colors ${
+              event.source_url
+                ? 'px-4 border-gray-200 text-gray-600 hover:bg-gray-50'
+                : 'flex-1 border-indigo-200 text-indigo-600 hover:bg-indigo-50'
+            }`}
           >
             <ExternalLink size={14} />
-            공식 페이지 바로가기
+            {event.source_url ? '검색' : '네이버에서 검색'}
           </a>
-        )}
+        </div>
       </div>
     </div>
   );
