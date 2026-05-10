@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Event, CATEGORY_LABEL, CATEGORY_LIGHT, CATEGORY_COLOR, getPriceRecommendation } from '@/types/event';
-import { format, parseISO, differenceInDays, isAfter, addDays } from 'date-fns';
+import { format, parseISO, differenceInDays, addDays } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { MapPin, Clock, Users, TrendingUp } from 'lucide-react';
 import EventModal from './EventModal';
@@ -16,26 +16,25 @@ export default function UpcomingEvents({ events, selectedLocation }: Props) {
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const in90days = addDays(today, 90);
+  const in365days = addDays(today, 365);
 
   const upcoming = events
     .filter((e) => {
       const end = parseISO(e.date_end);
       const start = parseISO(e.date_start);
       if (end < today) return false;
-      if (start > in90days) return false;
+      if (start > in365days) return false;
       if (selectedLocation !== '전체' && e.location !== selectedLocation) return false;
       return true;
     })
-    .sort((a, b) => a.date_start.localeCompare(b.date_start))
-    .slice(0, 8);
+    .sort((a, b) => a.date_start.localeCompare(b.date_start));
 
   if (upcoming.length === 0) return null;
 
   return (
     <div className="w-full">
       <h3 className="text-lg font-bold text-gray-800 mb-3">
-        📅 다가오는 행사 (90일 이내)
+        📅 다가오는 행사 <span className="text-sm font-normal text-gray-400">{upcoming.length}건</span>
       </h3>
       <div className="space-y-2">
         {upcoming.map((event) => {

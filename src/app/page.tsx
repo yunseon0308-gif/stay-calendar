@@ -66,31 +66,30 @@ export default function Home() {
           <LocationFilter selected={selectedLocation} onChange={setSelectedLocation} />
         </div>
 
-        {/* 메인 그리드 */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* 메인 그리드 — 캘린더 : 이벤트 리스트 등높이 */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:items-stretch">
           {/* 캘린더 (2/3) */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
+          <div className="lg:col-span-2 flex flex-col">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 flex-1">
               <Calendar events={SAMPLE_EVENTS} selectedLocation={selectedLocation} />
-            </div>
-
-            {/* 광고 배너 자리 */}
-            <div className="mt-4 bg-white border border-dashed border-gray-300 rounded-2xl h-24 flex items-center justify-center text-gray-400 text-sm">
-              광고 영역 (Google AdSense)
             </div>
           </div>
 
-          {/* 사이드바 (1/3) */}
-          <div className="space-y-4">
-            {/* 다가오는 행사 */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
+          {/* 사이드바 (1/3) — 캘린더와 같은 높이, 내부 스크롤 */}
+          <div className="flex flex-col min-h-0">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 flex-1 overflow-y-auto min-h-0">
               <UpcomingEvents events={SAMPLE_EVENTS} selectedLocation={selectedLocation} />
             </div>
+          </div>
+        </div>
 
-            {/* 광고 배너 자리 */}
-            <div className="bg-white border border-dashed border-gray-300 rounded-2xl h-60 flex items-center justify-center text-gray-400 text-sm">
-              광고 영역 (Google AdSense)
-            </div>
+        {/* 광고 영역 */}
+        <div className="mt-4 grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 bg-white border border-dashed border-gray-300 rounded-2xl h-24 flex items-center justify-center text-gray-400 text-sm">
+            광고 영역 (Google AdSense)
+          </div>
+          <div className="bg-white border border-dashed border-gray-300 rounded-2xl h-24 flex items-center justify-center text-gray-400 text-sm">
+            광고 영역 (Google AdSense)
           </div>
         </div>
       </main>
