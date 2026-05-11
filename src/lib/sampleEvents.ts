@@ -74,6 +74,33 @@ export const SAMPLE_EVENTS: Event[] = [
     source_url: 'https://www.biff.kr',
   },
 
+  {
+    id: '20',
+    title: 'BIGBANG BIGSHOW: REBORN 월드투어 - 서울',
+    category: 'concert',
+    date_start: '2026-08-01',
+    date_end: '2026-08-01',
+    venue: '서울 (장소 미정)',
+    location: '서울',
+    district: undefined,
+    expected_visitors: 50000,
+    description: '빅뱅 20주년 기념 월드투어 서울 개막 공연 (G-Dragon·태양·대성) · 장소·예매처 추후 공지',
+    source_url: 'https://www.koreaherald.com/article/10686832',
+  },
+  {
+    id: '18',
+    title: 'aespa LIVE TOUR SYNK : COMPLæXITY - 서울',
+    category: 'concert',
+    date_start: '2026-08-07',
+    date_end: '2026-08-08',
+    venue: '고척스카이돔',
+    location: '서울',
+    district: '고척',
+    expected_visitors: 20000,
+    description: '2026-27 aespa 월드투어 서울 공연 · 예매처 추후 공지 (Weverse 멤버십 프리세일 예정)',
+    source_url: 'https://weverse.io/aespa/notice/35057?hl=ko',
+  },
+
   // ── 불꽃놀이 ─────────────────────────────
   {
     id: '5',
