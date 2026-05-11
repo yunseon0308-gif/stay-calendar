@@ -36,3 +36,23 @@ CREATE TRIGGER trigger_events_updated_at
 ALTER TABLE events ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Public read" ON events FOR SELECT USING (is_active = TRUE);
 CREATE POLICY "Auth write" ON events FOR ALL USING (auth.role() = 'authenticated');
+
+-- 알림 구독자
+CREATE TABLE IF NOT EXISTS subscribers (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  email TEXT NOT NULL,
+  location TEXT NOT NULL,
+  district TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(email)
+);
+
+-- 커뮤니티 게시글
+CREATE TABLE IF NOT EXISTS posts (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  nickname TEXT NOT NULL,
+  location TEXT,
+  content TEXT NOT NULL,
+  likes INTEGER DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);

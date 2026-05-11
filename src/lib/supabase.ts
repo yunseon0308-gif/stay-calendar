@@ -60,3 +60,46 @@ export async function upsertEvents(events: Omit<Event, 'id'>[]): Promise<number>
   if (error) { console.error('upsertEvents error:', error); return 0; }
   return data?.length || 0;
 }
+
+// 구독자 저장
+export async function saveSubscriber(email: string, location: string, district: string): Promise<boolean> {
+  if (!supabase) return false;
+  const { error } = await supabase
+    .from('subscribers')
+    .insert([{ email, location, district }]);
+  if (error) { console.error('saveSubscriber error:', error); return false; }
+  return true;
+}
+
+// 게시글 조회
+export interface Post {
+  id: string;
+  nickname: string;
+  location: string;
+  content: string;
+  likes: number;
+  created_at: string;
+}
+
+export async function fetchPosts(): Promise<Post[]> {
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from('posts')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(50);
+  if (error) { console.error('fetchPosts error:', error); return []; }
+  return (data || []) as Post[];
+}
+
+// 게시글 생성
+export async function createPost(nickname: string, location: string, content: string): Promise<Post | null> {
+  if (!supabase) return null;
+  const { data, error } = await supabase
+    .from('posts')
+    .insert([{ nickname, location, content }])
+    .select()
+    .single();
+  if (error) { console.error('createPost error:', error); return null; }
+  return data as Post;
+}
