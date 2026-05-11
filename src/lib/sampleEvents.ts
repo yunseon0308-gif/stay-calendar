@@ -16,8 +16,8 @@ export const SAMPLE_EVENTS: Event[] = [
     location: '부산',
     district: '아시아드',
     expected_visitors: 50000,
-    description: '방탄소년단 월드투어 부산 공연 (6/13 데뷔기념일)',
-    source_url: 'https://tickets.interpark.com/contents/notice/detail/12426',
+    description: '방탄소년단 월드투어 부산 공연 (6/13 데뷔기념일) · NOL 티켓 단독 판매',
+    source_url: 'https://tickets.interpark.com/goods/26005547',
   },
 
   // ── 페스티벌 (확정) ───────────────────────
@@ -31,8 +31,8 @@ export const SAMPLE_EVENTS: Event[] = [
     location: '서울',
     district: '잠실',
     expected_visitors: 30000,
-    description: '자넬 모네, 에즈라 콜렉티브, 도겸·승관(세븐틴), 에픽하이 등',
-    source_url: 'https://www.seouljazz.co.kr',
+    description: '자넬 모네, 에즈라 콜렉티브, 도겸·승관(세븐틴), 에픽하이 등 · 멜론티켓 단독',
+    source_url: 'https://ticket.melon.com/performance/index.htm?prodId=212811',
   },
   {
     id: '19',
@@ -40,12 +40,12 @@ export const SAMPLE_EVENTS: Event[] = [
     category: 'festival',
     date_start: '2026-07-24',
     date_end: '2026-07-26',
-    venue: 'KINTEX 아웃도어 글로벌 스테이지',
+    venue: '고양 KINTEX 야외 글로벌 스테이지',
     location: '경기',
     district: '고양',
     expected_visitors: 35000,
-    description: '국내 최대 물 축제',
-    source_url: 'https://waterbomb.kr',
+    description: '국내 최대 물 축제 · 19세 이상 관람가',
+    source_url: 'https://tickets.interpark.com/goods/25018467',
   },
   {
     id: '9',
@@ -57,7 +57,8 @@ export const SAMPLE_EVENTS: Event[] = [
     location: '인천',
     district: '송도',
     expected_visitors: 40000,
-    source_url: 'https://pentaport.co.kr',
+    description: '제21회 · NOL 인터파크 단독 판매',
+    source_url: 'https://tickets.interpark.com/goods/26006159',
   },
   {
     id: '11',
