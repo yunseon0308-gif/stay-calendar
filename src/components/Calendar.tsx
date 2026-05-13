@@ -15,6 +15,7 @@ import {
   isSameMonth,
   isBefore,
   isAfter,
+  differenceInDays,
 } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -39,6 +40,16 @@ interface StripInfo {
 const WEEKDAYS  = ['일', '월', '화', '수', '목', '금', '토'];
 const STRIP_H   = 22; // px per strip row (including gap)
 const DAY_NUM_H = 28; // px reserved for the day-number area
+
+// Outline style for long events (7+ days) — border-only, no fill
+const CATEGORY_OUTLINE: Record<string, string> = {
+  concert:  'border-2 border-purple-400 text-purple-700 bg-purple-50',
+  festival: 'border-2 border-orange-400 text-orange-700 bg-orange-50',
+  fireworks:'border-2 border-yellow-400 text-yellow-600 bg-yellow-50',
+  sports:   'border-2 border-blue-400 text-blue-700 bg-blue-50',
+  esports:  'border-2 border-teal-400 text-teal-700 bg-teal-50',
+  other:    'border-2 border-gray-400 text-gray-600 bg-gray-50',
+};
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
@@ -334,6 +345,15 @@ export default function Calendar({ events, selectedLocation }: Props) {
                 const roundL = strip.isStart  ? 'rounded-l ml-0.5' : '';
                 const roundR = strip.isEnd    ? 'rounded-r mr-0.5' : '';
 
+                // 7일 이상 이벤트: 테두리만, 짧은 이벤트: 채움색
+                const isLong = differenceInDays(
+                  parseISO(strip.event.date_end),
+                  parseISO(strip.event.date_start),
+                ) >= 6;
+                const colorClass = isLong
+                  ? CATEGORY_OUTLINE[strip.event.category]
+                  : `${CATEGORY_COLOR[strip.event.category]} text-white`;
+
                 return (
                   <button
                     key={`${strip.event.id}-w${wi}`}
@@ -347,9 +367,9 @@ export default function Calendar({ events, selectedLocation }: Props) {
                       zIndex: 10,
                     }}
                     className={`
-                      ${CATEGORY_COLOR[strip.event.category]}
+                      ${colorClass}
                       ${roundL} ${roundR}
-                      text-white hover:opacity-80 transition-opacity
+                      hover:opacity-80 transition-opacity
                       flex items-center overflow-hidden cursor-pointer
                     `}
                   >
@@ -358,6 +378,12 @@ export default function Calendar({ events, selectedLocation }: Props) {
                       <span className="text-[10px] font-semibold px-1.5 truncate leading-none hidden md:block whitespace-nowrap">
                         {strip.event.title}
                       </span>
+                    )}
+                    {/* 모바일: outline 이벤트도 점 표시 */}
+                    {strip.isStart && isLong && (
+                      <span className="w-1.5 h-1.5 rounded-full ml-1 shrink-0 md:hidden"
+                        style={{ background: 'currentColor', opacity: 0.7 }}
+                      />
                     )}
                   </button>
                 );
