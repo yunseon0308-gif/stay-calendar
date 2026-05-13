@@ -1,19 +1,30 @@
 'use client';
 
-const LOCATIONS = [
-  '전체', '서울', '부산', '인천', '대구', '대전', '광주', '울산',
+import { useMemo } from 'react';
+import { Event } from '@/types/event';
+
+// 지역 표시 순서 (행사 없으면 자동 숨김)
+const LOCATION_ORDER = [
+  '전체', '서울', '부산', '인천', '대전', '대구', '광주', '울산',
   '경기', '강원', '충북', '충남', '경북', '경남', '전북', '전남', '제주',
 ];
 
 interface Props {
   selected: string;
   onChange: (loc: string) => void;
+  events: Event[];
 }
 
-export default function LocationFilter({ selected, onChange }: Props) {
+export default function LocationFilter({ selected, onChange, events }: Props) {
+  // 행사가 1개 이상 있는 지역만 추출 (순서 유지)
+  const activeLocations = useMemo(() => {
+    const locSet = new Set(events.map(e => e.location));
+    return LOCATION_ORDER.filter(loc => loc === '전체' || locSet.has(loc));
+  }, [events]);
+
   return (
     <div className="flex flex-wrap gap-2">
-      {LOCATIONS.map((loc) => (
+      {activeLocations.map((loc) => (
         <button
           key={loc}
           onClick={() => onChange(loc)}

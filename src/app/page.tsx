@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import Calendar from '@/components/Calendar';
 import LocationFilter from '@/components/LocationFilter';
@@ -9,6 +9,18 @@ import { SAMPLE_EVENTS } from '@/lib/sampleEvents';
 
 export default function Home() {
   const [selectedLocation, setSelectedLocation] = useState('전체');
+
+  // 행사가 있는 지역 목록 계산
+  const activeLocSet = useMemo(
+    () => new Set(SAMPLE_EVENTS.map(e => e.location)),
+    [],
+  );
+  // 선택된 지역에 행사가 없으면 전체로 복귀
+  useEffect(() => {
+    if (selectedLocation !== '전체' && !activeLocSet.has(selectedLocation)) {
+      setSelectedLocation('전체');
+    }
+  }, [selectedLocation, activeLocSet]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -56,7 +68,7 @@ export default function Home() {
         {/* 지역 필터 */}
         <div className="mb-6">
           <p className="text-sm font-semibold text-gray-700 mb-2">📍 지역 필터</p>
-          <LocationFilter selected={selectedLocation} onChange={setSelectedLocation} />
+          <LocationFilter selected={selectedLocation} onChange={setSelectedLocation} events={SAMPLE_EVENTS} />
         </div>
 
         {/* 메인 그리드 */}
