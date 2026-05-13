@@ -82,7 +82,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: '22',
     slug: 'seventeen-carat-land-2026',
-    title: '세븐틴 캐럿랜드 팬미팅',
+    title: '세븐틴 CARAT LAND 팬미팅',
     category: 'concert',
     date_start: '2026-06-20',
     date_end: '2026-06-21',
