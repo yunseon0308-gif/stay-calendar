@@ -535,7 +535,7 @@ export const SAMPLE_EVENTS: Event[] = [
     district: '잠실',
     expected_visitors: 15000,
     description: 'LoL 챔피언스 코리아 서머 파이널 · 9/12 결승 진출전 · 9/13 LCK 서머 결승전 · KSPO DOME 15,000석',
-    source_url: 'https://lolesports.com/ko-KR/news',
+    source_url: 'https://www.inven.co.kr/webzine/news/?news=311696&site=lol',
   },
   // 발로란트 챔피언스 2026 → 중국 상하이 개최 (9/24~10/18), 국내 오프라인 참여 불가 → 제외
   // 롤드컵(Worlds) 2026 → 미국 LA·텍사스·뉴욕 개최 (10/15~11/14), 국내 참여 불가 → 제외
