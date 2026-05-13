@@ -422,7 +422,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: '34a',
     slug: 'msi-2026-playin',
-    title: 'LoL MSI 2026 (플레이인)',
+    title: '롤 MSI 2026 - 시즌 중간 세계대회 (플레이인)',
     category: 'esports',
     date_start: '2026-06-28',
     date_end: '2026-07-01',
@@ -436,7 +436,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: '34b',
     slug: 'msi-2026-finals',
-    title: 'LoL MSI 2026 (결승주간)',
+    title: '롤 MSI 2026 - 시즌 중간 세계대회 (결승주간)',
     category: 'esports',
     date_start: '2026-07-08',
     date_end: '2026-07-12',
@@ -526,7 +526,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: '41',
     slug: 'lck-summer-finals-2026',
-    title: '2026 LCK Finals Weekend',
+    title: '2026 LCK Finals - 롤 한국 프로리그 결승전',
     category: 'esports',
     date_start: '2026-09-12',
     date_end: '2026-09-13',
