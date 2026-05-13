@@ -3,11 +3,6 @@
 import { useMemo } from 'react';
 import { Event } from '@/types/event';
 
-// 지역 표시 순서 (행사 없으면 자동 숨김)
-const LOCATION_ORDER = [
-  '전체', '서울', '부산', '인천', '대전', '대구', '광주', '울산',
-  '경기', '강원', '충북', '충남', '경북', '경남', '전북', '전남', '제주',
-];
 
 interface Props {
   selected: string;
@@ -16,10 +11,14 @@ interface Props {
 }
 
 export default function LocationFilter({ selected, onChange, events }: Props) {
-  // 행사가 1개 이상 있는 지역만 추출 (순서 유지)
+  // 행사가 1개 이상 있는 지역만 추출 (이벤트 수 내림차순)
   const activeLocations = useMemo(() => {
-    const locSet = new Set(events.map(e => e.location));
-    return LOCATION_ORDER.filter(loc => loc === '전체' || locSet.has(loc));
+    const countMap = new Map<string, number>();
+    events.forEach(e => countMap.set(e.location, (countMap.get(e.location) ?? 0) + 1));
+    const sorted = [...countMap.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .map(([loc]) => loc);
+    return ['전체', ...sorted];
   }, [events]);
 
   return (
