@@ -498,12 +498,12 @@ export const SAMPLE_EVENTS: Event[] = [
     category: 'festival',
     date_start: '2026-06-20',
     date_end: '2026-06-21',
-    venue: '서울 공원 일대 (미정)',
+    venue: '올림픽공원 88잔디마당 + 티켓링크 라이브 아레나',
     location: '서울',
-    district: undefined,
-    expected_visitors: 15000,
-    description: '서울 도심 공원에서 열리는 야외 음악 페스티벌 · 장소·라인업 추후 확정',
-    source_url: 'https://www.seoul.go.kr/',
+    district: '잠실',
+    expected_visitors: 20000,
+    description: '피크닉형 야외 음악 페스티벌 · 록·인디·발라드·K-POP 대중적 라인업 · 토 14:00~22:30 / 일 14:00~21:30 · 1DAY 119,000원 · NOL티켓·네이버예약',
+    source_url: 'https://pmf.co.kr/',
   },
 
   // ── 7월 ──────────────────────────────────────────────────
