@@ -1,20 +1,19 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { Event, CATEGORY_LABEL, CATEGORY_LIGHT, CATEGORY_COLOR, getPriceRecommendation } from '@/types/event';
 import { format, parseISO, differenceInDays, addDays } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { MapPin, Clock, Users, TrendingUp } from 'lucide-react';
-import { eventHref } from '@/lib/events';
 import { VOTE_RANGES } from '@/lib/voteConfig';
 
 interface Props {
   events: Event[];
   selectedLocation: string;
+  onEventClick?: (event: Event) => void;
 }
 
-export default function UpcomingEvents({ events, selectedLocation }: Props) {
+export default function UpcomingEvents({ events, selectedLocation, onEventClick }: Props) {
   const [voteSummary, setVoteSummary] = useState<Record<string, { total: number; topLabel: string }>>({});
 
   const today = new Date();
@@ -74,9 +73,9 @@ export default function UpcomingEvents({ events, selectedLocation }: Props) {
           const isToday = daysLeft === 0;
 
           return (
-            <Link
+            <button
               key={event.id}
-              href={eventHref(event)}
+              onClick={() => onEventClick?.(event)}
               className="w-full text-left bg-white border border-gray-100 rounded-xl p-3 hover:shadow-md hover:border-indigo-200 transition-all flex items-start gap-3"
             >
               {/* 카테고리 색상 바 */}
@@ -153,7 +152,7 @@ export default function UpcomingEvents({ events, selectedLocation }: Props) {
                   {isToday ? '끝' : `D-${dLabel}`}
                 </p>
               </div>
-            </Link>
+            </button>
           );
         })}
       </div>

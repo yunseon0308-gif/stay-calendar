@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { useRouter } from 'next/navigation';
 import {
   format,
   startOfMonth,
@@ -19,6 +18,7 @@ import {
 } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { Event, CATEGORY_COLOR, CATEGORY_LABEL } from '@/types/event';
 import { eventHref } from '@/lib/events';
 import { getActiveSeasonsForMonth, getSpecialDayMap } from '@/lib/seasonalInfo';
@@ -26,6 +26,7 @@ import { getActiveSeasonsForMonth, getSpecialDayMap } from '@/lib/seasonalInfo';
 interface Props {
   events: Event[];
   selectedLocation: string;
+  onEventClick?: (event: Event) => void;
 }
 
 interface StripInfo {
@@ -130,8 +131,12 @@ function computeStrips(
 
 // ── component ─────────────────────────────────────────────────────────────────
 
-export default function Calendar({ events, selectedLocation }: Props) {
+export default function Calendar({ events, selectedLocation, onEventClick }: Props) {
   const router = useRouter();
+  const handleClick = (event: Event) => {
+    if (onEventClick) onEventClick(event);
+    else router.push(eventHref(event));
+  };
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const monthStart   = startOfMonth(currentDate);
@@ -301,7 +306,7 @@ export default function Calendar({ events, selectedLocation }: Props) {
                             {singleEvts.slice(0, 3).map(evt => (
                               <button
                                 key={evt.id}
-                                onClick={() => router.push(eventHref(evt))}
+                                onClick={() => handleClick(evt)}
                                 className={`w-2 h-2 rounded-full ${CATEGORY_COLOR[evt.category]} hover:opacity-70`}
                                 title={evt.title}
                               />
@@ -316,7 +321,7 @@ export default function Calendar({ events, selectedLocation }: Props) {
                           {singleEvts.slice(0, 3).map(evt => (
                             <button
                               key={evt.id}
-                              onClick={() => router.push(eventHref(evt))}
+                              onClick={() => handleClick(evt)}
                               className={`w-full text-left text-[10px] font-medium text-white px-1.5 py-0.5 rounded truncate ${CATEGORY_COLOR[evt.category]} hover:opacity-80 transition-opacity`}
                             >
                               {evt.title}
@@ -357,7 +362,7 @@ export default function Calendar({ events, selectedLocation }: Props) {
                 return (
                   <button
                     key={`${strip.event.id}-w${wi}`}
-                    onClick={() => router.push(eventHref(strip.event))}
+                    onClick={() => handleClick(strip.event)}
                     style={{
                       position: 'absolute',
                       top:    `${topPx}px`,
