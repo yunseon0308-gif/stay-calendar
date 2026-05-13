@@ -474,7 +474,7 @@ export const SAMPLE_EVENTS: Event[] = [
     location: '경기',
     district: '고양',
     expected_visitors: 30000,
-    description: 'K컬처 엑스포 · 문화체육관광부·한국국제문화교류진흥원 주최 / CJ ENM 운영 · KPOP 공연(MyK LIVE) + K-뷰티·푸드·라이프스타일 체험(MyK STREET) + 토크포럼(MyK VOICE) + 해외 바이어 수출상담회(MyK TRADE) · ZEROBASEONE·RIIZE·TREASURE·HIGHLIGHT·EVNNE 등',
+    description: '문체부·CJ ENM 주최 K컬처 엑스포 · KPOP 공연·체험·전시·B2B 상담회 4트랙 · ZEROBASEONE·RIIZE·TREASURE·HIGHLIGHT·EVNNE 등',
     source_url: 'https://www.mykfesta.com/kor/',
   },
   {
