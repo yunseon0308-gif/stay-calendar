@@ -2,7 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import { Event, EventCategory, CATEGORY_LABEL } from '@/types/event';
-import { Plus, Trash2, RefreshCw, ArrowLeft, Save } from 'lucide-react';
+import { Plus, Trash2, RefreshCw, ArrowLeft, Save, Lock, Bell } from 'lucide-react';
+
+interface Subscriber {
+  id: string;
+  email: string;
+  location: string;
+  district: string;
+  created_at: string;
+}
+
+const ADMIN_PASSWORD = '3599ck';
 
 const EMPTY_FORM: Omit<Event, 'id' | 'created_at'> = {
   title: '',
@@ -20,8 +30,13 @@ const EMPTY_FORM: Omit<Event, 'id' | 'created_at'> = {
 const LOCATIONS = ['서울','부산','인천','대구','대전','광주','울산','경기','강원','충북','충남','경북','경남','전북','전남','제주','기타'];
 
 export default function AdminPage() {
+  const [authenticated, setAuthenticated] = useState(false);
+  const [pwInput, setPwInput] = useState('');
+  const [pwError, setPwError] = useState(false);
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
+  const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
+  const [subLoading, setSubLoading] = useState(false);
   const [crawling, setCrawling] = useState(false);
   const [crawlResult, setCrawlResult] = useState<string>('');
   const [showForm, setShowForm] = useState(false);
@@ -29,7 +44,34 @@ export default function AdminPage() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
 
-  useEffect(() => { loadEvents(); }, []);
+  useEffect(() => {
+    const ok = sessionStorage.getItem('admin_auth');
+    if (ok === 'true') setAuthenticated(true);
+  }, []);
+
+  useEffect(() => {
+    if (authenticated) {
+      loadEvents();
+      loadSubscribers();
+    }
+  }, [authenticated]);
+
+  function handleLogin(e: React.FormEvent) {
+    e.preventDefault();
+    if (pwInput === ADMIN_PASSWORD) {
+      sessionStorage.setItem('admin_auth', 'true');
+      setAuthenticated(true);
+      setPwError(false);
+    } else {
+      setPwError(true);
+      setPwInput('');
+    }
+  }
+
+  function handleLogout() {
+    sessionStorage.removeItem('admin_auth');
+    setAuthenticated(false);
+  }
 
   async function loadEvents() {
     setLoading(true);
@@ -37,6 +79,16 @@ export default function AdminPage() {
     const data = await res.json();
     setEvents(data.events || []);
     setLoading(false);
+  }
+
+  async function loadSubscribers() {
+    setSubLoading(true);
+    try {
+      const res = await fetch('/api/subscribers');
+      const data = await res.json();
+      setSubscribers(data.subscribers || []);
+    } catch { setSubscribers([]); }
+    finally { setSubLoading(false); }
   }
 
   async function handleSave() {
@@ -86,6 +138,46 @@ export default function AdminPage() {
     setCrawling(false);
   }
 
+  if (!authenticated) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+        <div className="bg-white rounded-2xl border border-gray-200 shadow-md p-8 w-full max-w-sm">
+          <div className="flex flex-col items-center mb-6">
+            <div className="bg-indigo-100 rounded-full p-3 mb-3">
+              <Lock size={24} className="text-indigo-600" />
+            </div>
+            <h1 className="text-lg font-bold text-gray-800">관리자 로그인</h1>
+            <p className="text-xs text-gray-400 mt-1">스테이달력 관리자 전용 페이지입니다</p>
+          </div>
+          <form onSubmit={handleLogin} className="flex flex-col gap-3">
+            <input
+              type="password"
+              value={pwInput}
+              onChange={e => { setPwInput(e.target.value); setPwError(false); }}
+              placeholder="비밀번호를 입력하세요"
+              autoFocus
+              className={`w-full border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 transition ${
+                pwError ? 'border-red-400 focus:ring-red-200' : 'border-gray-200 focus:ring-indigo-300'
+              }`}
+            />
+            {pwError && (
+              <p className="text-xs text-red-500 text-center">비밀번호가 올바르지 않습니다</p>
+            )}
+            <button
+              type="submit"
+              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl text-sm transition-colors"
+            >
+              로그인
+            </button>
+            <a href="/" className="text-center text-xs text-gray-400 hover:text-gray-600 mt-1">
+              ← 메인으로 돌아가기
+            </a>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* 헤더 */}
@@ -98,6 +190,13 @@ export default function AdminPage() {
             <h1 className="text-lg font-bold text-gray-800">🏨 스테이달력 관리자</h1>
           </div>
           <div className="flex items-center gap-2">
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-1 px-3 py-2 text-xs text-gray-400 hover:text-gray-600 border border-gray-200 rounded-xl transition-colors"
+            >
+              <Lock size={12} />
+              로그아웃
+            </button>
             <button
               onClick={handleCrawl}
               disabled={crawling}
@@ -246,6 +345,42 @@ export default function AdminPage() {
             </div>
           </div>
         )}
+
+        {/* 구독자 목록 */}
+        <div className="bg-white rounded-2xl border shadow-sm overflow-hidden">
+          <div className="px-5 py-4 border-b flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Bell size={16} className="text-indigo-500" />
+              <h2 className="font-bold text-gray-800">알림 구독자 ({subscribers.length}명)</h2>
+            </div>
+            <button onClick={loadSubscribers} className="text-xs text-gray-400 hover:text-gray-600">
+              새로고침
+            </button>
+          </div>
+          {subLoading ? (
+            <div className="p-6 text-center text-gray-400 text-sm">불러오는 중...</div>
+          ) : subscribers.length === 0 ? (
+            <div className="p-6 text-center text-gray-400 text-sm">아직 구독자가 없습니다.</div>
+          ) : (
+            <div className="divide-y">
+              {subscribers.map((sub, i) => (
+                <div key={sub.id ?? i} className="px-5 py-3 flex items-center justify-between hover:bg-gray-50">
+                  <div>
+                    <p className="text-sm font-medium text-gray-800">{sub.email}</p>
+                    <p className="text-xs text-gray-400 mt-0.5">
+                      📍 {sub.district ? `${sub.location} · ${sub.district}` : sub.location}
+                      {sub.created_at && (
+                        <span className="ml-2 text-gray-300">
+                          {new Date(sub.created_at).toLocaleDateString('ko-KR')}
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* 이벤트 목록 */}
         <div className="bg-white rounded-2xl border shadow-sm overflow-hidden">

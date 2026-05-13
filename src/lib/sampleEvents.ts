@@ -5,9 +5,25 @@ import { Event } from '@/types/event';
 // ※ (미확정) 표기 항목은 역대 패턴 기반 예상 일정
 export const SAMPLE_EVENTS: Event[] = [
 
+  // ── 4월 (지난 행사 · 투표 샘플) ─────────────────────────
+  {
+    id: 'past1',
+    slug: 'iu-hereh-encore-seoul-2026',
+    title: 'IU 콘서트 HEREH 앙코르 (서울)',
+    category: 'concert',
+    date_start: '2026-04-19',
+    date_end: '2026-04-20',
+    venue: '고척스카이돔',
+    location: '서울',
+    district: '구로',
+    expected_visitors: 24000,
+    description: '아이유 HEREH 월드투어 서울 앙코르 공연 · 2일간 · 전석 매진',
+  },
+
   // ── 5월 ─────────────────────────────────
   {
     id: '8',
+    slug: 'seoul-jazz-festival-2026',
     title: '서울재즈페스티벌 2026',
     category: 'festival',
     date_start: '2026-05-22',
@@ -23,6 +39,7 @@ export const SAMPLE_EVENTS: Event[] = [
   // ── 6월 ─────────────────────────────────
   {
     id: '21',
+    slug: 'weverse-con-festival-2026',
     title: 'Weverse Con Festival 2026',
     category: 'festival',
     date_start: '2026-06-06',
@@ -31,11 +48,12 @@ export const SAMPLE_EVENTS: Event[] = [
     location: '서울',
     district: '잠실',
     expected_visitors: 20000,
-    description: 'BTS·SEVENTEEN·LE SSERAFIM 등 30팀+ 출연 멀티스테이지 K-POP 페스티벌',
+    description: "트리뷰트 아티스트 비(RAIN)를 포함해 엔하이픈, 르세라핌, 지코, 보이넥스트도어, 플레이브 등 30팀 출연 멀티스테이지 K-POP 페스티벌",
     source_url: 'https://weverseconfestival.weverse.io/en/',
   },
   {
     id: '1',
+    slug: 'bts-arirang-busan-2026',
     title: 'BTS 월드투어 ARIRANG - 부산',
     category: 'concert',
     date_start: '2026-06-12',
@@ -49,19 +67,21 @@ export const SAMPLE_EVENTS: Event[] = [
   },
   {
     id: '25',
+    slug: 'world-dj-festival-2026',
     title: '월드 DJ 페스티벌 20주년',
     category: 'festival',
     date_start: '2026-06-13',
     date_end: '2026-06-14',
-    venue: '과천 서울랜드',
-    location: '경기',
-    district: '과천',
+    venue: '잠실체육단지',
+    location: '서울',
+    district: '잠실',
     expected_visitors: 20000,
     description: '국내 최대 EDM 페스티벌 20주년 기념',
     source_url: 'https://www.songkick.com/festivals/365443-world-dj/id/42893744-world-dj-festival-2026',
   },
   {
     id: '22',
+    slug: 'seventeen-carat-land-2026',
     title: 'SEVENTEEN CARAT LAND 팬미팅',
     category: 'concert',
     date_start: '2026-06-20',
@@ -75,6 +95,7 @@ export const SAMPLE_EVENTS: Event[] = [
   },
   {
     id: '23',
+    slug: 'bof-10th-busan-2026',
     title: '부산원아시아페스티벌(BOF) 10주년',
     category: 'festival',
     date_start: '2026-06-27',
@@ -84,12 +105,13 @@ export const SAMPLE_EVENTS: Event[] = [
     district: '아시아드',
     expected_visitors: 30000,
     description: 'K-POP 멀티 아티스트 페스티벌 10주년',
-    source_url: 'https://mobile.busan.com/view/newsunicollvill/view.php?code=2026040315341460860',
+    source_url: 'https://tickets.interpark.com/contents/notice/detail/13676',
   },
 
   // ── 7월 ─────────────────────────────────
   {
     id: '24',
+    slug: 'blackpink-deadline-goyang-2026',
     title: 'BLACKPINK DEADLINE 월드투어 - 고양',
     category: 'concert',
     date_start: '2026-07-05',
@@ -103,6 +125,7 @@ export const SAMPLE_EVENTS: Event[] = [
   },
   {
     id: '26',
+    slug: 'lesserafim-pureflow-incheon-2026',
     title: 'LE SSERAFIM TOUR PUREFLOW - 인천',
     category: 'concert',
     date_start: '2026-07-11',
@@ -112,10 +135,11 @@ export const SAMPLE_EVENTS: Event[] = [
     district: '영종도',
     expected_visitors: 18000,
     description: '르세라핌 월드투어 인천 공연',
-    source_url: 'https://www.heraldmuse.com/article/10732238',
+    source_url: 'https://weverse.io/lesserafim/notice/35577',
   },
   {
     id: '19',
+    slug: 'waterbomb-seoul-2026',
     title: '워터밤 서울 2026',
     category: 'festival',
     date_start: '2026-07-24',
@@ -129,6 +153,7 @@ export const SAMPLE_EVENTS: Event[] = [
   },
   {
     id: '9',
+    slug: 'incheon-pentaport-2026',
     title: '인천 펜타포트 락 페스티벌 2026',
     category: 'festival',
     date_start: '2026-07-31',
@@ -144,6 +169,7 @@ export const SAMPLE_EVENTS: Event[] = [
   // ── 8월 ─────────────────────────────────
   {
     id: '20',
+    slug: 'bigbang-reborn-seoul-2026',
     title: 'BIGBANG BIGSHOW: REBORN 월드투어 - 서울',
     category: 'concert',
     date_start: '2026-08-01',
@@ -157,6 +183,7 @@ export const SAMPLE_EVENTS: Event[] = [
   },
   {
     id: '18',
+    slug: 'aespa-synk-complexity-seoul-2026',
     title: 'aespa LIVE TOUR SYNK : COMPLæXITY - 서울',
     category: 'concert',
     date_start: '2026-08-07',
@@ -172,6 +199,7 @@ export const SAMPLE_EVENTS: Event[] = [
   // ── 9월 ─────────────────────────────────
   {
     id: '27',
+    slug: 'coldplay-seoul-2026',
     title: 'Coldplay Music of the Spheres - 서울',
     category: 'concert',
     date_start: '2026-09-12',
@@ -187,6 +215,7 @@ export const SAMPLE_EVENTS: Event[] = [
   // ── 10월 ─────────────────────────────────
   {
     id: '28',
+    slug: 'post-malone-goyang-2026',
     title: 'Post Malone The BIG Stadium Tour - 고양',
     category: 'concert',
     date_start: '2026-10-02',
@@ -200,6 +229,7 @@ export const SAMPLE_EVENTS: Event[] = [
   },
   {
     id: '5',
+    slug: 'seoul-fireworks-2026',
     title: '한화 서울세계불꽃축제 (※ 미확정)',
     category: 'fireworks',
     date_start: '2026-10-03',
@@ -212,6 +242,7 @@ export const SAMPLE_EVENTS: Event[] = [
   },
   {
     id: '29',
+    slug: 'edc-korea-2026',
     title: 'EDC Korea 2026',
     category: 'festival',
     date_start: '2026-10-03',
@@ -225,6 +256,7 @@ export const SAMPLE_EVENTS: Event[] = [
   },
   {
     id: '30',
+    slug: 'weeknd-supercon-goyang-2026',
     title: 'The Weeknd 현대카드 슈퍼콘서트 28 - 고양',
     category: 'concert',
     date_start: '2026-10-07',
@@ -234,10 +266,11 @@ export const SAMPLE_EVENTS: Event[] = [
     district: '고양',
     expected_visitors: 50000,
     description: '위켄드 내한 · 양일 합산 10만명 규모 (현대카드 슈퍼콘서트)',
-    source_url: 'https://www.newsis.com/view/NISX20260422_0003601040',
+    source_url: 'https://tickets.interpark.com/contents/notice/detail/13790',
   },
   {
     id: '31',
+    slug: 'charlie-puth-goyang-2026',
     title: 'Charlie Puth 내한 공연 - 고양',
     category: 'concert',
     date_start: '2026-10-11',
@@ -247,10 +280,11 @@ export const SAMPLE_EVENTS: Event[] = [
     district: '고양',
     expected_visitors: 40000,
     description: '찰리 푸스 단독 내한',
-    source_url: 'https://www.newsis.com/view/NISX20260422_0003601040',
+    source_url: 'https://tickets.interpark.com/goods/26005759',
   },
   {
     id: '11',
+    slug: 'biff-busan-2026',
     title: '부산 국제영화제 (BIFF)',
     category: 'festival',
     date_start: '2026-10-01',
@@ -264,6 +298,7 @@ export const SAMPLE_EVENTS: Event[] = [
   },
   {
     id: '13',
+    slug: 'kbo-korean-series-2026',
     title: 'KBO 한국시리즈 (※ 미확정)',
     category: 'sports',
     date_start: '2026-10-21',
@@ -279,6 +314,7 @@ export const SAMPLE_EVENTS: Event[] = [
   // ── 11월 ─────────────────────────────────
   {
     id: '6',
+    slug: 'busan-fireworks-2026',
     title: '부산 광안리 불꽃축제 (※ 미확정)',
     category: 'fireworks',
     date_start: '2026-11-07',

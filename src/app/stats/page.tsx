@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import PastEventVotes from '@/components/PastEventVotes';
 
 const STATS_DATA = [
   {
@@ -45,7 +46,6 @@ const STATS_DATA = [
   },
 ];
 
-// 안내 데이터 (수치 없이 정성적 정보)
 const QUALITATIVE_DATA = [
   {
     title: '부산 광안리 불꽃축제',
@@ -113,21 +113,16 @@ export default function StatsPage() {
               key={item.title}
               className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 hover:border-indigo-100 hover:shadow-md transition-all flex flex-col"
             >
-              {/* 상단: 아이콘 + 카테고리 */}
               <div className="flex items-center justify-between mb-3">
                 <span className="text-2xl">{item.icon}</span>
                 <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${item.categoryColor}`}>
                   {item.category}
                 </span>
               </div>
-
-              {/* 행사명 */}
               <h3 className="font-bold text-gray-800 text-base mb-1 leading-tight">{item.title}</h3>
               <p className="text-xs text-gray-400 mb-3 flex items-center gap-1">
                 <span>📍</span><span>{item.location}</span>
               </p>
-
-              {/* 수치 */}
               <div className="grid grid-cols-2 gap-3 mb-3">
                 <div className="bg-indigo-50 rounded-xl px-3 py-2.5 text-center">
                   <p className="text-xs text-indigo-500 font-medium mb-1">숙박 수요</p>
@@ -138,21 +133,12 @@ export default function StatsPage() {
                   <p className="text-sm font-black text-emerald-700 leading-tight">{item.priceMultiple}</p>
                 </div>
               </div>
-
-              {/* 상세 설명 */}
               <p className="text-xs text-gray-500 leading-relaxed mb-3 flex-1">{item.detail}</p>
-
-              {/* 출처 */}
               <div className="flex flex-wrap gap-1.5 pt-3 border-t border-gray-100">
                 <span className="text-xs text-gray-400">출처:</span>
                 {item.sources.map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-indigo-500 hover:underline"
-                  >
+                  <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer"
+                    className="text-xs text-indigo-500 hover:underline">
                     {s.label}
                   </a>
                 ))}
@@ -178,14 +164,19 @@ export default function StatsPage() {
           ))}
         </div>
 
+        {/* ── 커뮤니티 투표 현황 (지난 행사) ─────────────────── */}
+        <h2 className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-2">📊 커뮤니티 투표 현황</h2>
+        <p className="text-xs text-gray-400 mb-4">지난 행사에서 호스트들이 직접 참여한 실제 단가 인상률 투표 결과입니다.</p>
+        <PastEventVotes />
+
         {/* 하단 안내 */}
-        <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-5 text-sm text-indigo-700">
+        <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-5 text-sm text-indigo-700 mt-10">
           <p className="font-bold mb-2">💡 데이터 활용 팁</p>
           <ul className="list-disc list-inside space-y-1 text-indigo-600 text-xs leading-relaxed">
             <li>불꽃축제는 단가 인상 폭이 가장 큽니다 — 2개월 전부터 준비하세요.</li>
             <li>해외 팬 비중 높은 K-POP 공연은 국내보다 빨리 예약이 마감됩니다.</li>
             <li>행사 당일만 아니라 전날 숙박 수요도 함께 올라갑니다.</li>
-            <li>데이터는 지속적으로 업데이트될 예정입니다.</li>
+            <li>투표 데이터는 실제 호스트들의 경험을 바탕으로 누적됩니다.</li>
           </ul>
         </div>
       </main>

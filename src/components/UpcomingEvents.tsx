@@ -1,11 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Event, CATEGORY_LABEL, CATEGORY_LIGHT, CATEGORY_COLOR, getPriceRecommendation } from '@/types/event';
 import { format, parseISO, differenceInDays, addDays } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { MapPin, Clock, Users, TrendingUp } from 'lucide-react';
-import EventModal from './EventModal';
+import { eventHref } from '@/lib/events';
+import { VOTE_RANGES } from '@/lib/voteConfig';
 
 interface Props {
   events: Event[];
@@ -13,14 +15,15 @@ interface Props {
 }
 
 export default function UpcomingEvents({ events, selectedLocation }: Props) {
-  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  const [voteSummary, setVoteSummary] = useState<Record<string, { total: number; topLabel: string }>>({});
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const in365days = addDays(today, 365);
 
   const upcoming = events
     .filter((e) => {
-      const end = parseISO(e.date_end);
+      const end   = parseISO(e.date_end);
       const start = parseISO(e.date_start);
       if (end < today) return false;
       if (start > in365days) return false;
@@ -28,6 +31,26 @@ export default function UpcomingEvents({ events, selectedLocation }: Props) {
       return true;
     })
     .sort((a, b) => a.date_start.localeCompare(b.date_start));
+
+  // 투표 요약 일괄 조회
+  useEffect(() => {
+    if (events.length === 0) return;
+    const ids = events.map(e => e.id).join(',');
+    fetch(`/api/votes?eventIds=${ids}`)
+      .then(r => r.json())
+      .then(data => {
+        const summary: Record<string, { total: number; topLabel: string }> = {};
+        for (const [id, v] of Object.entries(data.summaries || {})) {
+          const { results, total } = v as { results: Record<string, number>; total: number };
+          if (total === 0) continue;
+          const topKey = Object.entries(results).sort((a, b) => b[1] - a[1])[0]?.[0] ?? '';
+          const topLabel = VOTE_RANGES.find(r => r.key === topKey)?.label ?? '';
+          summary[id] = { total, topLabel };
+        }
+        setVoteSummary(summary);
+      })
+      .catch(() => {});
+  }, [events]);
 
   if (upcoming.length === 0) return null;
 
@@ -38,27 +61,29 @@ export default function UpcomingEvents({ events, selectedLocation }: Props) {
       </h3>
       <div className="space-y-2">
         {upcoming.map((event) => {
-          const start = parseISO(event.date_start);
+          const start    = parseISO(event.date_start);
           const daysLeft = differenceInDays(start, today);
           const priceRec = getPriceRecommendation(event.expected_visitors);
+          const vote     = voteSummary[event.id];
 
-          // 지역 표기: 서울 / 잠실
           const locationLabel = event.district
             ? `${event.location} / ${event.district}`
             : event.location;
 
-          // D-day 표기
-          const dLabel = daysLeft === 0 ? '끝' : String(daysLeft);
+          const dLabel  = daysLeft === 0 ? '끝' : String(daysLeft);
           const isToday = daysLeft === 0;
 
           return (
-            <button
+            <Link
               key={event.id}
-              onClick={() => setSelectedEvent(event)}
+              href={eventHref(event)}
               className="w-full text-left bg-white border border-gray-100 rounded-xl p-3 hover:shadow-md hover:border-indigo-200 transition-all flex items-start gap-3"
             >
               {/* 카테고리 색상 바 */}
-              <div className={`w-1.5 rounded-full shrink-0 mt-1 ${CATEGORY_COLOR[event.category]}`} style={{ minHeight: '48px' }} />
+              <div
+                className={`w-1.5 rounded-full shrink-0 mt-1 ${CATEGORY_COLOR[event.category]}`}
+                style={{ minHeight: '48px' }}
+              />
 
               <div className="flex-1 min-w-0">
                 {/* 뱃지 row */}
@@ -111,6 +136,15 @@ export default function UpcomingEvents({ events, selectedLocation }: Props) {
                     )}
                   </div>
                 )}
+
+                {/* 투표 요약 */}
+                {vote && vote.total > 0 && (
+                  <div className="flex items-center gap-1 mt-1">
+                    <span className="text-[10px] text-indigo-500 bg-indigo-50 border border-indigo-100 px-1.5 py-0.5 rounded-full font-medium">
+                      📊 {vote.total}명 투표 · 최다 {vote.topLabel}
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* D-Day 숫자 */}
@@ -119,14 +153,10 @@ export default function UpcomingEvents({ events, selectedLocation }: Props) {
                   {isToday ? '끝' : `D-${dLabel}`}
                 </p>
               </div>
-            </button>
+            </Link>
           );
         })}
       </div>
-
-      {selectedEvent && (
-        <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
-      )}
     </div>
   );
 }

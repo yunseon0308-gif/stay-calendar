@@ -41,6 +41,7 @@ export function getPriceRecommendation(visitors?: number): string {
 
 export interface Event {
   id: string;
+  slug?: string;   // SEO URL: /event/[slug]
   title: string;
   category: EventCategory;
   date_start: string; // YYYY-MM-DD
