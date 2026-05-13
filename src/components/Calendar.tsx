@@ -43,12 +43,12 @@ const DAY_NUM_H = 28; // px reserved for the day-number area
 
 // Outline style for long events (7+ days) — border-only, no fill
 const CATEGORY_OUTLINE: Record<string, string> = {
-  concert:  'border-2 border-purple-400 text-purple-700 bg-purple-50',
-  festival: 'border-2 border-orange-400 text-orange-700 bg-orange-50',
-  fireworks:'border-2 border-yellow-400 text-yellow-600 bg-yellow-50',
-  sports:   'border-2 border-blue-400 text-blue-700 bg-blue-50',
-  esports:  'border-2 border-teal-400 text-teal-700 bg-teal-50',
-  other:    'border-2 border-gray-400 text-gray-600 bg-gray-50',
+  concert:  'border border-purple-400 text-purple-700 bg-purple-50',
+  festival: 'border border-orange-400 text-orange-700 bg-orange-50',
+  fireworks:'border border-yellow-400 text-yellow-600 bg-yellow-50',
+  sports:   'border border-blue-400 text-blue-700 bg-blue-50',
+  esports:  'border border-teal-400 text-teal-700 bg-teal-50',
+  other:    'border border-gray-400 text-gray-600 bg-gray-50',
 };
 
 // ── helpers ──────────────────────────────────────────────────────────────────
