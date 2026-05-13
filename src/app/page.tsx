@@ -1,19 +1,14 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import Calendar from '@/components/Calendar';
 import LocationFilter from '@/components/LocationFilter';
 import UpcomingEvents from '@/components/UpcomingEvents';
-import EventModal from '@/components/EventModal';
 import { SAMPLE_EVENTS } from '@/lib/sampleEvents';
-import { Event } from '@/types/event';
 
 export default function Home() {
   const [selectedLocation, setSelectedLocation] = useState('전체');
-  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
-  const handleEventClick = useCallback((event: Event) => setSelectedEvent(event), []);
-  const handleModalClose = useCallback(() => setSelectedEvent(null), []);
 
   // 행사가 있는 지역 목록 계산
   const activeLocSet = useMemo(
@@ -81,22 +76,19 @@ export default function Home() {
           {/* 캘린더 (2/3) */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
-              <Calendar events={SAMPLE_EVENTS} selectedLocation={selectedLocation} onEventClick={handleEventClick} />
+              <Calendar events={SAMPLE_EVENTS} selectedLocation={selectedLocation} />
             </div>
           </div>
 
           {/* 사이드바 (1/3) — sticky + 내부 스크롤 */}
           <div className="lg:sticky lg:top-[73px]">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 overflow-y-auto max-h-[calc(100vh-100px)]">
-              <UpcomingEvents events={SAMPLE_EVENTS} selectedLocation={selectedLocation} onEventClick={handleEventClick} />
+              <UpcomingEvents events={SAMPLE_EVENTS} selectedLocation={selectedLocation} />
             </div>
           </div>
         </div>
 
       </main>
-
-      {/* 이벤트 모달 */}
-      <EventModal event={selectedEvent} onClose={handleModalClose} />
 
       {/* 푸터 */}
       <footer className="mt-12 border-t border-gray-100 py-6 text-center text-xs text-gray-400">

@@ -26,7 +26,6 @@ import { getActiveSeasonsForMonth, getSpecialDayMap } from '@/lib/seasonalInfo';
 interface Props {
   events: Event[];
   selectedLocation: string;
-  onEventClick?: (event: Event) => void;
 }
 
 interface StripInfo {
@@ -131,12 +130,9 @@ function computeStrips(
 
 // ── component ─────────────────────────────────────────────────────────────────
 
-export default function Calendar({ events, selectedLocation, onEventClick }: Props) {
+export default function Calendar({ events, selectedLocation }: Props) {
   const router = useRouter();
-  const handleClick = (event: Event) => {
-    if (onEventClick) onEventClick(event);
-    else router.push(eventHref(event));
-  };
+  const handleClick = (event: Event) => router.push(eventHref(event));
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const monthStart   = startOfMonth(currentDate);

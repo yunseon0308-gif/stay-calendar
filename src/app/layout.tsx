@@ -39,8 +39,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html
@@ -49,6 +51,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col pb-16 md:pb-0">
         {children}
+        {modal}
         <MobileNav />
         {ADSENSE_CLIENT && (
           <Script
