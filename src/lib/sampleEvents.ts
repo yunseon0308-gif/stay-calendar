@@ -502,7 +502,7 @@ export const SAMPLE_EVENTS: Event[] = [
     location: '서울',
     district: '잠실',
     expected_visitors: 20000,
-    description: '피크닉형 야외 음악 페스티벌 · 록·인디·발라드·K-POP 대중적 라인업 · 토 14:00~22:30 / 일 14:00~21:30 · 1DAY 119,000원 · NOL티켓·네이버예약',
+    description: '피크닉형 야외 음악 페스티벌\n록·인디·발라드·K-POP 대중적 라인업\n토 14:00~22:30 / 일 14:00~21:30\n1DAY 119,000원 · NOL티켓·네이버예약',
     source_url: 'https://pmf.co.kr/',
   },
 

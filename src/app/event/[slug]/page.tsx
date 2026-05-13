@@ -245,7 +245,7 @@ export default async function EventPage({
 
           {/* 설명 */}
           {event.description && (
-            <p className="mt-5 text-sm text-gray-600 bg-gray-50 rounded-xl p-4 leading-relaxed">
+            <p className="mt-5 text-sm text-gray-600 bg-gray-50 rounded-xl p-4 leading-relaxed whitespace-pre-line">
               {event.description}
             </p>
           )}

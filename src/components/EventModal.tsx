@@ -111,7 +111,7 @@ export default function EventModal({ event }: { event: Event }) {
           </div>
 
           {event.description && (
-            <p className="text-sm text-gray-600 bg-gray-50 rounded-xl p-3.5 leading-relaxed mb-4">
+            <p className="text-sm text-gray-600 bg-gray-50 rounded-xl p-3.5 leading-relaxed mb-4 whitespace-pre-line">
               {event.description}
             </p>
           )}
