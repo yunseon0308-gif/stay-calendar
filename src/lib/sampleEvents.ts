@@ -9,7 +9,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: 'past1',
     slug: 'iu-hereh-encore-seoul-2026',
-    title: 'IU 콘서트 HEREH 앙코르 (서울)',
+    title: '아이유 콘서트 HEREH 앙코르 (서울)',
     category: 'concert',
     date_start: '2026-04-19',
     date_end: '2026-04-20',
@@ -54,7 +54,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: '1',
     slug: 'bts-arirang-busan-2026',
-    title: 'BTS 월드투어 ARIRANG - 부산',
+    title: '방탄소년단 월드투어 ARIRANG - 부산',
     category: 'concert',
     date_start: '2026-06-12',
     date_end: '2026-06-13',
@@ -82,7 +82,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: '22',
     slug: 'seventeen-carat-land-2026',
-    title: 'SEVENTEEN CARAT LAND 팬미팅',
+    title: '세븐틴 캐럿랜드 팬미팅',
     category: 'concert',
     date_start: '2026-06-20',
     date_end: '2026-06-21',
@@ -112,7 +112,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: '24',
     slug: 'blackpink-deadline-goyang-2026',
-    title: 'BLACKPINK DEADLINE 월드투어 - 고양',
+    title: '블랙핑크 DEADLINE 월드투어 - 고양',
     category: 'concert',
     date_start: '2026-07-05',
     date_end: '2026-07-06',
@@ -126,7 +126,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: '26',
     slug: 'lesserafim-pureflow-incheon-2026',
-    title: 'LE SSERAFIM TOUR PUREFLOW - 인천',
+    title: '르세라핌 PUREFLOW 투어 - 인천',
     category: 'concert',
     date_start: '2026-07-11',
     date_end: '2026-07-12',
@@ -170,7 +170,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: '20',
     slug: 'bigbang-reborn-seoul-2026',
-    title: 'BIGBANG BIGSHOW: REBORN 월드투어 - 서울',
+    title: '빅뱅 BIGSHOW: REBORN 월드투어 - 서울',
     category: 'concert',
     date_start: '2026-08-01',
     date_end: '2026-08-01',
@@ -184,7 +184,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: '18',
     slug: 'aespa-synk-complexity-seoul-2026',
-    title: 'aespa LIVE TOUR SYNK : COMPLæXITY - 서울',
+    title: '에스파 SYNK : COMPLæXITY 투어 - 서울',
     category: 'concert',
     date_start: '2026-08-07',
     date_end: '2026-08-08',
@@ -192,7 +192,7 @@ export const SAMPLE_EVENTS: Event[] = [
     location: '서울',
     district: '고척',
     expected_visitors: 20000,
-    description: '2026-27 aespa 월드투어 서울 공연 · 예매처 추후 공지 (Weverse 프리세일 예정)',
+    description: '에스파 2026-27 월드투어 서울 공연 · 예매처 추후 공지 (Weverse 프리세일 예정)',
     source_url: 'https://weverse.io/aespa/notice/35057?hl=ko',
   },
 
@@ -200,7 +200,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: '27',
     slug: 'coldplay-seoul-2026',
-    title: 'Coldplay Music of the Spheres - 서울',
+    title: '콜드플레이 Music of the Spheres - 서울',
     category: 'concert',
     date_start: '2026-09-12',
     date_end: '2026-09-13',
@@ -216,7 +216,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: '28',
     slug: 'post-malone-goyang-2026',
-    title: 'Post Malone The BIG Stadium Tour - 고양',
+    title: '포스트 말론 The BIG Stadium Tour - 고양',
     category: 'concert',
     date_start: '2026-10-02',
     date_end: '2026-10-02',
@@ -257,7 +257,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: '30',
     slug: 'weeknd-supercon-goyang-2026',
-    title: 'The Weeknd 현대카드 슈퍼콘서트 28 - 고양',
+    title: '더 위켄드 현대카드 슈퍼콘서트 28 - 고양',
     category: 'concert',
     date_start: '2026-10-07',
     date_end: '2026-10-08',
@@ -271,7 +271,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: '31',
     slug: 'charlie-puth-goyang-2026',
-    title: 'Charlie Puth 내한 공연 - 고양',
+    title: '찰리 푸스 내한 공연 - 고양',
     category: 'concert',
     date_start: '2026-10-11',
     date_end: '2026-10-11',
