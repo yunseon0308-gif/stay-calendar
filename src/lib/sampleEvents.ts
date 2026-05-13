@@ -54,7 +54,7 @@ export const SAMPLE_EVENTS: Event[] = [
   {
     id: '1',
     slug: 'bts-arirang-busan-2026',
-    title: '방탄소년단 월드투어 ARIRANG - 부산',
+    title: 'BTS 월드투어 ARIRANG - 부산',
     category: 'concert',
     date_start: '2026-06-12',
     date_end: '2026-06-13',
