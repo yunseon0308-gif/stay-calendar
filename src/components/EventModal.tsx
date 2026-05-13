@@ -2,12 +2,10 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { format, parseISO } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import { X, MapPin, Calendar, Users, TrendingUp, ExternalLink, ArrowUpRight } from 'lucide-react';
+import { X, MapPin, Calendar, Users, TrendingUp, ExternalLink } from 'lucide-react';
 import { Event, CATEGORY_LABEL, CATEGORY_LIGHT, getPriceRecommendation } from '@/types/event';
-import { eventHref } from '@/lib/events';
 import EventVoting from '@/components/EventVoting';
 
 export default function EventModal({ event }: { event: Event }) {
@@ -148,12 +146,19 @@ export default function EventModal({ event }: { event: Event }) {
                 예매 / 공식 사이트
               </a>
             )}
-            <Link
-              href={eventHref(event)}
-              className="flex items-center justify-center gap-1 text-sm font-medium text-gray-500 hover:text-indigo-600 border border-gray-200 hover:border-indigo-300 px-4 py-3 rounded-xl transition-colors whitespace-nowrap"
+            <a
+              href={`https://search.naver.com/search.naver?query=${encodeURIComponent(event.title)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center justify-center gap-1.5 text-sm font-semibold py-3 rounded-xl border transition-colors ${
+                event.source_url
+                  ? 'px-4 border-gray-200 text-gray-600 hover:bg-gray-50'
+                  : 'flex-1 border-indigo-200 text-indigo-600 hover:bg-indigo-50'
+              }`}
             >
-              상세페이지 <ArrowUpRight size={13} />
-            </Link>
+              <ExternalLink size={14} />
+              {event.source_url ? '검색' : '네이버에서 검색'}
+            </a>
           </div>
 
         </div>
