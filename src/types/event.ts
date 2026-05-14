@@ -33,14 +33,13 @@ export const CATEGORY_LIGHT: Record<EventCategory, string> = {
   other:    'bg-gray-100 text-gray-700 border-gray-200',
 };
 
-// 일 최대 동시관람객 수 기준 추천 요금 배율
-export function getPriceRecommendation(visitors?: number): string {
-  if (!visitors) return '';
-  if (visitors >= 300000) return '3~4배 인상 추천';
-  if (visitors >= 50000)  return '2~3배 인상 추천';
-  if (visitors >= 20000)  return '1.5~2배 인상 추천';
-  if (visitors >= 10000)  return '1.2~1.5배 인상 추천';
-  return '1.1~1.2배 인상 추천';
+// 숙박 영향도(impact) 기준 추천 요금 배율
+export function getPriceRecommendation(impact?: number): string {
+  if (!impact || impact <= 1) return '';
+  if (impact === 5) return '2~3배 인상 추천';
+  if (impact === 4) return '1.5~2배 인상 추천';
+  if (impact === 3) return '1.2~1.5배 인상 추천';
+  return '1.1~1.2배 인상 추천'; // impact 2
 }
 
 export interface Event {

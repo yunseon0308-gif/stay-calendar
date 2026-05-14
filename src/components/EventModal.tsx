@@ -28,7 +28,7 @@ export default function EventModal({ event }: { event: Event }) {
   const start         = parseISO(event.date_start);
   const end           = parseISO(event.date_end);
   const isSameDay     = event.date_start === event.date_end;
-  const priceRec      = getPriceRecommendation(event.expected_visitors);
+  const priceRec      = getPriceRecommendation(event.impact);
   const locationLabel = event.district
     ? `${event.location} / ${event.district}`
     : event.location;
@@ -127,21 +127,25 @@ export default function EventModal({ event }: { event: Event }) {
             </p>
           )}
 
-          <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-3.5 mb-4">
-            <p className="text-xs font-bold text-indigo-700 mb-1">💡 단가 조정 팁</p>
-            <p className="text-sm text-indigo-700 leading-relaxed">
-              {event.expected_visitors && event.expected_visitors >= 100000
-                ? '초대형 행사. 2~3개월 전부터 미리 올려두세요.'
-                : event.expected_visitors && event.expected_visitors >= 50000
-                ? '중대형 행사. 1~2개월 전 조정을 추천해요.'
-                : '주변 숙박 수요가 증가할 수 있습니다.'}
-            </p>
-            {priceRec && (
-              <p className="mt-1.5 text-sm font-bold text-indigo-800">
-                👉 추천 인상률: <span className="text-emerald-700">{priceRec}</span>
+          {event.impact && event.impact >= 2 && (
+            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-3.5 mb-4">
+              <p className="text-xs font-bold text-indigo-700 mb-1">💡 단가 조정 팁</p>
+              <p className="text-sm text-indigo-700 leading-relaxed">
+                {event.impact === 5
+                  ? '초대형 행사. 2~3개월 전부터 미리 올려두세요.'
+                  : event.impact === 4
+                  ? '대형 행사. 1~2개월 전 조정을 추천해요.'
+                  : event.impact === 3
+                  ? '중형 행사. 행사 1개월 전 조정을 추천해요.'
+                  : '소규모 수요 증가. 행사 1~2주 전 확인하세요.'}
               </p>
-            )}
-          </div>
+              {priceRec && (
+                <p className="mt-1.5 text-sm font-bold text-indigo-800">
+                  👉 추천 인상률: <span className="text-emerald-700">{priceRec}</span>
+                </p>
+              )}
+            </div>
+          )}
 
           <EventVoting eventId={event.id} />
 

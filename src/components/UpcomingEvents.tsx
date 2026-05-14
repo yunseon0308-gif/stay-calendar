@@ -63,7 +63,7 @@ export default function UpcomingEvents({ events, selectedLocation }: Props) {
         {upcoming.map((event) => {
           const start    = parseISO(event.date_start);
           const daysLeft = differenceInDays(start, today);
-          const priceRec = getPriceRecommendation(event.expected_visitors);
+          const priceRec = getPriceRecommendation(event.impact);
           const vote     = voteSummary[event.id];
 
           const locationLabel = event.district
@@ -125,7 +125,7 @@ export default function UpcomingEvents({ events, selectedLocation }: Props) {
                         <span key={i} className={`text-xs ${i <= event.impact! ? 'text-yellow-400' : 'text-gray-200'}`}>★</span>
                       ))}
                     </span>
-                    <span className="text-[10px] text-gray-400">{getImpactBasis(event.impact)}</span>
+                    <span className="text-[10px] text-gray-400">{event.impact_basis ?? getImpactBasis(event.impact)}</span>
                   </div>
                 )}
 
