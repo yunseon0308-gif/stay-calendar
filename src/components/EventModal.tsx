@@ -59,13 +59,26 @@ export default function EventModal({ event }: { event: Event }) {
         </div>
 
         {/* 헤더 */}
-        <div className="flex items-start justify-between px-5 pt-3 pb-2 shrink-0">
-          <span className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border ${CATEGORY_LIGHT[event.category]}`}>
-            {CATEGORY_LABEL[event.category]}
-          </span>
+        <div className="flex items-center justify-between px-5 pt-3 pb-2 shrink-0 gap-2">
+          <div className="flex items-center gap-2 flex-wrap min-w-0">
+            <span className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border shrink-0 ${CATEGORY_LIGHT[event.category]}`}>
+              {CATEGORY_LABEL[event.category]}
+            </span>
+            {event.impact && (
+              <div className="flex items-center gap-1.5 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-full">
+                <span className="text-[10px] font-semibold text-amber-700">숙박영향</span>
+                <span className="flex items-center leading-none">
+                  {[1,2,3,4,5].map(i => (
+                    <span key={i} className={`text-xs ${i <= event.impact! ? 'text-yellow-400' : 'text-gray-200'}`}>★</span>
+                  ))}
+                </span>
+                <span className="text-[10px] text-amber-600 font-medium">{event.impact_basis ?? getImpactBasis(event.impact)}</span>
+              </div>
+            )}
+          </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-600 ml-2 shrink-0 transition-colors"
+            className="p-1.5 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-600 shrink-0 transition-colors"
           >
             <X size={18} />
           </button>
@@ -108,17 +121,6 @@ export default function EventModal({ event }: { event: Event }) {
                 <span className="ml-1.5 text-xs text-gray-400">({locationLabel})</span>
               </span>
             </div>
-            {event.impact && (
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] text-gray-400 font-medium">숙박영향</span>
-                <span className="flex items-center leading-none">
-                  {[1,2,3,4,5].map(i => (
-                    <span key={i} className={`text-sm ${i <= event.impact! ? 'text-yellow-400' : 'text-gray-200'}`}>★</span>
-                  ))}
-                </span>
-                <span className="text-xs text-gray-500">{event.impact_basis ?? getImpactBasis(event.impact)}</span>
-              </div>
-            )}
           </div>
 
           {event.description && (

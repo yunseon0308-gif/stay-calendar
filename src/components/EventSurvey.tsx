@@ -86,9 +86,9 @@ export default function EventSurvey({ eventId, eventSlug }: Props) {
         <button
           type="button"
           onClick={goToStats}
-          className="text-xs text-indigo-500 hover:text-indigo-700 whitespace-nowrap shrink-0 transition-colors"
+          className="text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-lg whitespace-nowrap shrink-0 transition-colors"
         >
-          이 행사 통계보기 →
+          📊 통계보기 →
         </button>
       </div>
 
