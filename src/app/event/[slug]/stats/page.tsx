@@ -30,11 +30,11 @@ export default async function EventStatsPage({
       <header className="bg-white border-b border-gray-100 sticky top-0 z-40 shadow-sm">
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link
-            href={`/event/${slug}`}
+            href="/"
             className="flex items-center gap-1 text-sm text-gray-500 hover:text-indigo-600 transition-colors group"
           >
             <ChevronLeft size={16} className="group-hover:-translate-x-0.5 transition-transform" />
-            행사로 돌아가기
+            홈으로 돌아가기
           </Link>
           <Link href="/" className="text-lg font-black text-indigo-700">🏨 스테이달력</Link>
         </div>
