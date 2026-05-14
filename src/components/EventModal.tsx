@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { format, parseISO } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { X, MapPin, Calendar, Users, TrendingUp, ExternalLink } from 'lucide-react';
-import { Event, CATEGORY_LABEL, CATEGORY_LIGHT, getPriceRecommendation } from '@/types/event';
+import { Event, CATEGORY_LABEL, CATEGORY_LIGHT, getPriceRecommendation, getImpactFlames } from '@/types/event';
 import EventVoting from '@/components/EventVoting';
 
 export default function EventModal({ event }: { event: Event }) {
@@ -74,9 +74,15 @@ export default function EventModal({ event }: { event: Event }) {
         {/* 스크롤 내용 */}
         <div className="overflow-y-auto px-5 pb-6 flex-1">
 
-          <h2 className="text-xl font-black text-gray-900 leading-tight mb-3">
+          <h2 className="text-xl font-black text-gray-900 leading-tight mb-1">
             {event.title}
           </h2>
+          {event.impact && (
+            <p className="text-sm mb-3">
+              <span className="text-orange-500">{getImpactFlames(event.impact)}</span>
+              <span className="text-xs text-gray-400 ml-1.5">숙박 영향도</span>
+            </p>
+          )}
 
           {(visitorsLabel || priceRec) && (
             <div className="flex flex-wrap gap-2 mb-4">

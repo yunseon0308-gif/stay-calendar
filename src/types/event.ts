@@ -54,7 +54,14 @@ export interface Event {
   location: string;   // 시/도 예: 서울, 부산
   district?: string;  // 상세 지역 예: 잠실, 여의도, 고척
   expected_visitors?: number;
+  impact?: 1 | 2 | 3 | 4 | 5; // 숙박 영향도 🔥
   source_url?: string;
   description?: string;
   created_at?: string;
+}
+
+/** 숙박 영향도 🔥 문자열 반환 */
+export function getImpactFlames(impact?: number): string {
+  if (!impact) return '';
+  return '🔥'.repeat(impact);
 }

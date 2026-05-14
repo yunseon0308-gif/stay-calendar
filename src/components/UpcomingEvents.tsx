@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Event, CATEGORY_LABEL, CATEGORY_LIGHT, CATEGORY_COLOR, getPriceRecommendation } from '@/types/event';
+import { Event, CATEGORY_LABEL, CATEGORY_LIGHT, CATEGORY_COLOR, getPriceRecommendation, getImpactFlames } from '@/types/event';
 import { format, parseISO, differenceInDays, addDays } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { MapPin, Clock, Users, TrendingUp } from 'lucide-react';
@@ -104,6 +104,13 @@ export default function UpcomingEvents({ events, selectedLocation }: Props) {
 
                 {/* 제목 */}
                 <p className="text-sm font-semibold text-gray-800 truncate">{event.title}</p>
+
+                {/* 숙박 영향도 */}
+                {event.impact && (
+                  <p className="text-xs text-orange-500 leading-none mt-0.5">
+                    {getImpactFlames(event.impact)}
+                  </p>
+                )}
 
                 {/* 날짜 + 지역 */}
                 <div className="flex items-center gap-3 mt-0.5 flex-wrap">
