@@ -45,7 +45,7 @@ const DAY_NUM_H = 28; // px reserved for the day-number area
 const CATEGORY_OUTLINE: Record<string, string> = {
   concert:  'border border-purple-400 text-purple-700 bg-purple-50',
   festival: 'border border-orange-400 text-orange-700 bg-orange-50',
-  fireworks:'border border-yellow-400 text-yellow-600 bg-yellow-50',
+  fireworks:'border border-orange-400 text-orange-700 bg-orange-50',
   sports:   'border border-blue-400 text-blue-700 bg-blue-50',
   esports:  'border border-teal-400 text-teal-700 bg-teal-50',
   other:    'border border-gray-400 text-gray-600 bg-gray-50',
@@ -397,12 +397,16 @@ export default function Calendar({ events, selectedLocation }: Props) {
 
       {/* ── 범례 ──────────────────────────────────────────── */}
       <div className="mt-4 flex flex-wrap gap-3">
-        {(Object.keys(CATEGORY_COLOR) as Array<keyof typeof CATEGORY_COLOR>).map(cat => (
-          <div key={cat} className="flex items-center gap-1.5 text-xs text-gray-500">
-            <span className={`w-3 h-3 rounded-sm ${CATEGORY_COLOR[cat]}`} />
-            {CATEGORY_LABEL[cat]}
-          </div>
-        ))}
+        {(Object.keys(CATEGORY_COLOR) as Array<keyof typeof CATEGORY_COLOR>)
+          .filter((cat, _, arr) =>
+            arr.findIndex(c => CATEGORY_LABEL[c] === CATEGORY_LABEL[cat]) === arr.indexOf(cat)
+          )
+          .map(cat => (
+            <div key={cat} className="flex items-center gap-1.5 text-xs text-gray-500">
+              <span className={`w-3 h-3 rounded-sm ${CATEGORY_COLOR[cat]}`} />
+              {CATEGORY_LABEL[cat]}
+            </div>
+          ))}
         <div className="flex items-center gap-1.5 text-xs text-gray-400 ml-auto">
           🏮 설날·추석 &nbsp;|&nbsp; 🎄 크리스마스 &nbsp;|&nbsp; 🎆 새해·연말
         </div>
