@@ -149,7 +149,7 @@ export default function EventModal({ event }: { event: Event }) {
             eventSlug={event.slug ?? event.id}
             onStats={() => {
               document.body.style.overflow = '';
-              router.push(`/event/${event.slug ?? event.id}/stats`);
+              window.location.href = `/event/${event.slug ?? event.id}/stats`;
             }}
           />
 
