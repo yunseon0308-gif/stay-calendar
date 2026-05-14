@@ -60,8 +60,12 @@ export interface Event {
   created_at?: string;
 }
 
-/** 숙박 영향도 🔥 문자열 반환 */
-export function getImpactFlames(impact?: number): string {
+/** 숙박 영향도 판단 근거 텍스트 */
+export function getImpactBasis(impact?: number): string {
   if (!impact) return '';
-  return '🔥'.repeat(impact);
+  if (impact === 5) return '전국 관광객 집결';
+  if (impact === 4) return '광역 수요 급증';
+  if (impact === 3) return '지역 수요 증가';
+  if (impact === 2) return '수요 소폭 증가';
+  return '영향 미미';
 }

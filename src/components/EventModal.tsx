@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { format, parseISO } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { X, MapPin, Calendar, Users, TrendingUp, ExternalLink } from 'lucide-react';
-import { Event, CATEGORY_LABEL, CATEGORY_LIGHT, getPriceRecommendation, getImpactFlames } from '@/types/event';
+import { Event, CATEGORY_LABEL, CATEGORY_LIGHT, getPriceRecommendation, getImpactBasis } from '@/types/event';
 import EventVoting from '@/components/EventVoting';
 
 export default function EventModal({ event }: { event: Event }) {
@@ -77,12 +77,6 @@ export default function EventModal({ event }: { event: Event }) {
           <h2 className="text-xl font-black text-gray-900 leading-tight mb-1">
             {event.title}
           </h2>
-          {event.impact && (
-            <p className="text-sm mb-3">
-              <span className="text-orange-500">{getImpactFlames(event.impact)}</span>
-              <span className="text-xs text-gray-400 ml-1.5">숙박 영향도</span>
-            </p>
-          )}
 
           {(visitorsLabel || priceRec) && (
             <div className="flex flex-wrap gap-2 mb-4">
@@ -114,6 +108,17 @@ export default function EventModal({ event }: { event: Event }) {
                 <span className="ml-1.5 text-xs text-gray-400">({locationLabel})</span>
               </span>
             </div>
+            {event.impact && (
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] text-gray-400 font-medium">숙박영향</span>
+                <span className="flex items-center leading-none">
+                  {[1,2,3,4,5].map(i => (
+                    <span key={i} className={`text-sm ${i <= event.impact! ? 'text-yellow-400' : 'text-gray-200'}`}>★</span>
+                  ))}
+                </span>
+                <span className="text-xs text-gray-500">{getImpactBasis(event.impact)}</span>
+              </div>
+            )}
           </div>
 
           {event.description && (

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Event, CATEGORY_LABEL, CATEGORY_LIGHT, CATEGORY_COLOR, getPriceRecommendation, getImpactFlames } from '@/types/event';
+import { Event, CATEGORY_LABEL, CATEGORY_LIGHT, CATEGORY_COLOR, getPriceRecommendation, getImpactBasis } from '@/types/event';
 import { format, parseISO, differenceInDays, addDays } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { MapPin, Clock, Users, TrendingUp } from 'lucide-react';
@@ -105,13 +105,6 @@ export default function UpcomingEvents({ events, selectedLocation }: Props) {
                 {/* 제목 */}
                 <p className="text-sm font-semibold text-gray-800 truncate">{event.title}</p>
 
-                {/* 숙박 영향도 */}
-                {event.impact && (
-                  <p className="text-xs text-orange-500 leading-none mt-0.5">
-                    {getImpactFlames(event.impact)}
-                  </p>
-                )}
-
                 {/* 날짜 + 지역 */}
                 <div className="flex items-center gap-3 mt-0.5 flex-wrap">
                   <span className="flex items-center gap-1 text-xs text-gray-400">
@@ -123,6 +116,18 @@ export default function UpcomingEvents({ events, selectedLocation }: Props) {
                     {locationLabel}
                   </span>
                 </div>
+
+                {/* 숙박 영향도 별점 */}
+                {event.impact && (
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    <span className="flex items-center leading-none">
+                      {[1,2,3,4,5].map(i => (
+                        <span key={i} className={`text-xs ${i <= event.impact! ? 'text-yellow-400' : 'text-gray-200'}`}>★</span>
+                      ))}
+                    </span>
+                    <span className="text-[10px] text-gray-400">{getImpactBasis(event.impact)}</span>
+                  </div>
+                )}
 
                 {/* 예상 인원 + 추천 요금 */}
                 {(event.expected_visitors || priceRec) && (
