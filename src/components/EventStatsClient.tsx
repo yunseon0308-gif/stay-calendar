@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
+import { Trash2 } from 'lucide-react';
+
+const MY_COMMENTS_KEY = 'my_comment_ids';
 
 const PRICE_LABELS: Record<string, string> = {
   'under1.2': '1.2배 미만',
@@ -46,6 +49,15 @@ export default function EventStatsClient({ eventId, eventSlug }: Props) {
   const [author, setAuthor]     = useState('');
   const [content, setContent]   = useState('');
   const [submitting, setSubmit] = useState(false);
+  const [myIds, setMyIds]       = useState<Set<string>>(new Set());
+
+  // localStorage에서 내 댓글 ID 로드
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(MY_COMMENTS_KEY) || '[]');
+      setMyIds(new Set(saved));
+    } catch {}
+  }, []);
 
   useEffect(() => {
     fetch(`/api/survey?eventId=${eventId}`)
@@ -73,8 +85,28 @@ export default function EventStatsClient({ eventId, eventSlug }: Props) {
       if (data.comment) {
         setComments(prev => [...prev, data.comment]);
         setContent(''); setAuthor('');
+        // 내 댓글 ID 저장
+        const updated = new Set([...myIds, data.comment.id]);
+        setMyIds(updated);
+        try { localStorage.setItem(MY_COMMENTS_KEY, JSON.stringify([...updated])); } catch {}
       }
     } finally { setSubmit(false); }
+  };
+
+  const handleDelete = async (commentId: string) => {
+    if (!confirm('댓글을 삭제할까요?')) return;
+    try {
+      await fetch('/api/survey/comments', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ eventId, commentId }),
+      });
+      setComments(prev => prev.filter(c => c.id !== commentId));
+      const updated = new Set([...myIds]);
+      updated.delete(commentId);
+      setMyIds(updated);
+      try { localStorage.setItem(MY_COMMENTS_KEY, JSON.stringify([...updated])); } catch {}
+    } catch {}
   };
 
   return (
@@ -192,9 +224,20 @@ export default function EventStatsClient({ eventId, eventSlug }: Props) {
                     </span>
                   )}
                 </div>
-                <span className="text-[10px] text-gray-300">
-                  {formatDistanceToNow(new Date(c.createdAt), { addSuffix: true, locale: ko })}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] text-gray-300">
+                    {formatDistanceToNow(new Date(c.createdAt), { addSuffix: true, locale: ko })}
+                  </span>
+                  {myIds.has(c.id) && (
+                    <button
+                      onClick={() => handleDelete(c.id)}
+                      className="text-gray-300 hover:text-red-400 transition-colors"
+                      title="댓글 삭제"
+                    >
+                      <Trash2 size={13} />
+                    </button>
+                  )}
+                </div>
               </div>
               <p className="text-sm text-gray-600 leading-relaxed">{c.content}</p>
             </div>

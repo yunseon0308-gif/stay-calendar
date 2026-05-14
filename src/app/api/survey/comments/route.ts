@@ -58,6 +58,21 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({ comments: getStore(eventId) });
 }
 
+export async function DELETE(req: NextRequest) {
+  const { eventId, commentId } = await req.json().catch(() => ({}));
+  if (!eventId || !commentId)
+    return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+
+  const list = store[eventId];
+  if (!list) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+
+  const idx = list.findIndex(c => c.id === commentId);
+  if (idx === -1) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+
+  list.splice(idx, 1);
+  return NextResponse.json({ ok: true });
+}
+
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
   const { eventId, author, content } = body;
