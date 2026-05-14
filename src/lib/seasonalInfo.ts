@@ -87,6 +87,26 @@ export const SEASONS: Season[] = [
     bgColor: 'bg-yellow-50', textColor: 'text-yellow-800', borderColor: 'border-yellow-200',
     priority: 1,
   },
+  {
+    id: 'spring-exchange',
+    icon: '📚',
+    name: '봄학기 교환학생 입국 시즌',
+    message: '외국인 교환학생 입국 집중 시기 (2월 중하순 수요 집중 · ~6월 말 체류). 대학가 인근 숙소 장기 수요가 증가해요.',
+    startMonth: 2, startDay: 15,
+    endMonth: 6,   endDay: 30,
+    bgColor: 'bg-violet-50', textColor: 'text-violet-800', borderColor: 'border-violet-200',
+    priority: 4,
+  },
+  {
+    id: 'autumn-exchange',
+    icon: '📚',
+    name: '가을학기 교환학생 입국 시즌',
+    message: '외국인 교환학생 입국 집중 시기 (8월 중하순 수요 집중 · ~12월 말 체류). 대학가·외국인 밀집 지역 숙소 수요가 높아지는 시기예요.',
+    startMonth: 8, startDay: 15,
+    endMonth: 12,  endDay: 20,
+    bgColor: 'bg-indigo-50', textColor: 'text-indigo-800', borderColor: 'border-indigo-200',
+    priority: 4,
+  },
 ];
 
 /** 주어진 월(1-12)에 해당하는 시즌 목록 반환 */
