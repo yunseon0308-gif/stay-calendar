@@ -56,9 +56,9 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
   const { eventId, priceRange, occupancy } = body;
-  if (!eventId || !priceRange || !occupancy)
+  if (!eventId || !priceRange)
     return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
 
-  getStore(eventId).push({ eventId, priceRange, occupancy, createdAt: new Date().toISOString() });
+  getStore(eventId).push({ eventId, priceRange, occupancy: occupancy ?? 'unknown', createdAt: new Date().toISOString() });
   return NextResponse.json({ ok: true });
 }
