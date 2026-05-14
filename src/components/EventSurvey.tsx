@@ -13,11 +13,11 @@ const PRICE_OPTIONS = [
 ];
 
 const SPEED_OPTIONS = [
-  { key: 'super-fast', label: '2주 내 만실' },
-  { key: 'fast',       label: '한 달 전 만실' },
-  { key: 'normal',     label: '보통 속도' },
-  { key: 'slow',       label: '늦게 찼음' },
-  { key: 'no-effect',  label: '별 차이 없음' },
+  { key: '3m', label: '3개월 전' },
+  { key: '2m', label: '2개월 전' },
+  { key: '1m', label: '1개월 전' },
+  { key: '2w', label: '2주 전' },
+  { key: '1w', label: '1주 전' },
 ];
 
 interface Props {
@@ -80,7 +80,7 @@ export default function EventSurvey({ eventId, eventSlug, onStats }: Props) {
       {/* Q2 예약 속도 */}
       <div className="mb-4">
         <p className="text-[11px] font-semibold text-gray-600 mb-2">
-          Q2. 예약이 얼마나 빨리 찼나요?
+          Q2. 예약이 언제쯤 찼나요?
         </p>
         <div className="flex flex-wrap gap-1.5">
           {SPEED_OPTIONS.map(({ key, label }) => (

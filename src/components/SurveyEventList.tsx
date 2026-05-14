@@ -15,11 +15,11 @@ const PRICE_LABELS: Record<string, string> = {
 };
 
 const SPEED_LABELS: Record<string, string> = {
-  'super-fast': '2주 내 만실',
-  'fast':       '한 달 전 만실',
-  'normal':     '보통 속도',
-  'slow':       '늦게 찼음',
-  'no-effect':  '별 차이 없음',
+  '3m': '3개월 전',
+  '2m': '2개월 전',
+  '1m': '1개월 전',
+  '2w': '2주 전',
+  '1w': '1주 전',
 };
 
 type SurveyStats = {

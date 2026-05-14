@@ -19,16 +19,16 @@ const SEED_EVENT_ID = SAMPLE_EVENTS
   .sort((a, b) => a.date_start.localeCompare(b.date_start))[0]?.id ?? '';
 
 const SEED: { priceRange: string; occupancy: string }[] = [
-  { priceRange: '1.5-2',    occupancy: 'super-fast' },
-  { priceRange: '2-3',      occupancy: 'super-fast' },
-  { priceRange: '1.5-2',    occupancy: 'fast' },
-  { priceRange: '1.2-1.5',  occupancy: 'fast' },
-  { priceRange: '2-3',      occupancy: 'normal' },
-  { priceRange: '1.5-2',    occupancy: 'super-fast' },
-  { priceRange: '3-5',      occupancy: 'super-fast' },
-  { priceRange: '1.2-1.5',  occupancy: 'fast' },
-  { priceRange: 'under1.2', occupancy: 'normal' },
-  { priceRange: '2-3',      occupancy: 'super-fast' },
+  { priceRange: '1.5-2',    occupancy: '2m' },
+  { priceRange: '2-3',      occupancy: '3m' },
+  { priceRange: '1.5-2',    occupancy: '1m' },
+  { priceRange: '1.2-1.5',  occupancy: '1m' },
+  { priceRange: '2-3',      occupancy: '2m' },
+  { priceRange: '1.5-2',    occupancy: '2w' },
+  { priceRange: '3-5',      occupancy: '3m' },
+  { priceRange: '1.2-1.5',  occupancy: '2m' },
+  { priceRange: 'under1.2', occupancy: '1w' },
+  { priceRange: '2-3',      occupancy: '2m' },
 ];
 
 function seedFor(eventId: string): SurveyEntry[] {

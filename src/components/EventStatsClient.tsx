@@ -18,12 +18,17 @@ const PRICE_LABELS: Record<string, string> = {
 };
 
 const OCCUPANCY_LABELS: Record<string, string> = {
+  '3m':         '3개월 전',
+  '2m':         '2개월 전',
+  '1m':         '1개월 전',
+  '2w':         '2주 전',
+  '1w':         '1주 전',
+  // 구버전 호환
   'super-fast': '2주 내 만실',
   'fast':       '한 달 전 만실',
   'normal':     '보통 속도',
   'slow':       '늦게 찼음',
   'no-effect':  '별 차이 없음',
-  // 구버전 호환
   'full':       '거의 만실',
   'high':       '예약 많음',
   'increased':  '평소보다 증가',
@@ -32,7 +37,7 @@ const OCCUPANCY_LABELS: Record<string, string> = {
 };
 
 const PRICE_ORDER     = ['under1.2','1.2-1.5','1.5-2','2-3','3-5','over5'];
-const OCCUPANCY_ORDER = ['super-fast','fast','normal','slow','no-effect'];
+const OCCUPANCY_ORDER = ['3m','2m','1m','2w','1w'];
 
 type Stats = {
   total: number;
