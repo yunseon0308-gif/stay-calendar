@@ -77,32 +77,30 @@ export default function EventSurvey({ eventId, eventSlug, onStats }: Props) {
         ))}
       </div>
 
-      {/* Q2 예약 속도 — Q1 선택 후 등장 */}
-      {priceRange && (
-        <div className="mb-4">
-          <p className="text-[11px] font-semibold text-gray-600 mb-2">
-            Q2. 예약이 얼마나 빨리 찼나요?
-          </p>
-          <div className="flex flex-wrap gap-1.5">
-            {SPEED_OPTIONS.map(({ key, label }) => (
-              <button
-                key={key}
-                type="button"
-                onClick={() => setSpeed(key)}
-                className={`text-xs px-3 py-1.5 rounded-lg border transition-colors ${
-                  speed === key
-                    ? 'bg-emerald-600 text-white border-emerald-600 font-semibold'
-                    : 'border-gray-200 text-gray-600 hover:border-emerald-300 hover:text-emerald-600 hover:bg-emerald-50'
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
+      {/* Q2 예약 속도 */}
+      <div className="mb-4">
+        <p className="text-[11px] font-semibold text-gray-600 mb-2">
+          Q2. 예약이 얼마나 빨리 찼나요?
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {SPEED_OPTIONS.map(({ key, label }) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => setSpeed(key)}
+              className={`text-xs px-3 py-1.5 rounded-lg border transition-colors ${
+                speed === key
+                  ? 'bg-emerald-600 text-white border-emerald-600 font-semibold'
+                  : 'border-gray-200 text-gray-600 hover:border-emerald-300 hover:text-emerald-600 hover:bg-emerald-50'
+              }`}
+            >
+              {label}
+            </button>
+          ))}
         </div>
-      )}
+      </div>
 
-      {/* Q2 선택 후 통계보기 버튼 등장 */}
+      {/* 둘 다 선택 시 통계보기 버튼 등장 */}
       {priceRange && speed && (
         <button
           type="button"
