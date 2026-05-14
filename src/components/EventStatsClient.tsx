@@ -15,15 +15,21 @@ const PRICE_LABELS: Record<string, string> = {
 };
 
 const OCCUPANCY_LABELS: Record<string, string> = {
-  'full':      '거의 만실',
-  'high':      '예약 많음',
-  'increased': '평소보다 증가',
-  'normal':    '비슷함',
-  'low':       '영향 적음',
+  'super-fast': '2주 내 만실',
+  'fast':       '한 달 전 만실',
+  'normal':     '보통 속도',
+  'slow':       '늦게 찼음',
+  'no-effect':  '별 차이 없음',
+  // 구버전 호환
+  'full':       '거의 만실',
+  'high':       '예약 많음',
+  'increased':  '평소보다 증가',
+  'low':        '영향 적음',
+  'unknown':    '-',
 };
 
 const PRICE_ORDER     = ['under1.2','1.2-1.5','1.5-2','2-3','3-5','over5'];
-const OCCUPANCY_ORDER = ['full','high','increased','normal','low'];
+const OCCUPANCY_ORDER = ['super-fast','fast','normal','slow','no-effect'];
 
 type Stats = {
   total: number;
@@ -127,7 +133,7 @@ export default function EventStatsClient({ eventId, eventSlug }: Props) {
 
       {/* 예약률 체감 */}
       <div className="bg-white rounded-2xl border border-gray-100 p-5">
-        <p className="text-sm font-bold text-gray-800 mb-4">📊 예약률 체감</p>
+        <p className="text-sm font-bold text-gray-800 mb-4">⚡ 예약 속도</p>
         {stats ? (
           <div className="space-y-2.5">
             {OCCUPANCY_ORDER.map(key => {

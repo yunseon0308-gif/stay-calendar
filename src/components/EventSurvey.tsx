@@ -12,25 +12,34 @@ const PRICE_OPTIONS = [
   { key: 'over5',    label: '5배 이상' },
 ];
 
+const SPEED_OPTIONS = [
+  { key: 'super-fast', label: '2주 내 만실' },
+  { key: 'fast',       label: '한 달 전 만실' },
+  { key: 'normal',     label: '보통 속도' },
+  { key: 'slow',       label: '늦게 찼음' },
+  { key: 'no-effect',  label: '별 차이 없음' },
+];
+
 interface Props {
   eventId: string;
   eventSlug: string;
-  onStats?: () => void; // 모달에서 호출 시 모달 닫힘 처리용
+  onStats?: () => void;
 }
 
 export default function EventSurvey({ eventId, eventSlug, onStats }: Props) {
   const router = useRouter();
   const [priceRange, setPriceRange] = useState<string | null>(null);
+  const [speed, setSpeed]           = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
   const handleStats = async () => {
-    if (!priceRange || submitting) return;
+    if (!priceRange || !speed || submitting) return;
     setSubmitting(true);
     try {
       await fetch('/api/survey', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ eventId, priceRange }),
+        body: JSON.stringify({ eventId, priceRange, occupancy: speed }),
       });
     } catch {
       // ignore
@@ -45,12 +54,11 @@ export default function EventSurvey({ eventId, eventSlug, onStats }: Props) {
   return (
     <div className="border-t border-gray-100 pt-5">
 
-      {/* 헤더 */}
       <p className="text-sm font-bold text-gray-800 mb-3">🏆 운영자 실전 데이터 등록</p>
 
       {/* Q1 단가 인상률 */}
       <p className="text-[11px] font-semibold text-gray-600 mb-2">
-        이 행사 기간, 평소 대비 단가를 얼마나 인상하셨나요?
+        Q1. 평소 대비 단가를 얼마나 인상하셨나요?
       </p>
       <div className="flex flex-wrap gap-1.5 mb-4">
         {PRICE_OPTIONS.map(({ key, label }) => (
@@ -69,8 +77,33 @@ export default function EventSurvey({ eventId, eventSlug, onStats }: Props) {
         ))}
       </div>
 
-      {/* 선택 후 통계보기 버튼 등장 */}
+      {/* Q2 예약 속도 — Q1 선택 후 등장 */}
       {priceRange && (
+        <div className="mb-4">
+          <p className="text-[11px] font-semibold text-gray-600 mb-2">
+            Q2. 예약이 얼마나 빨리 찼나요?
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {SPEED_OPTIONS.map(({ key, label }) => (
+              <button
+                key={key}
+                type="button"
+                onClick={() => setSpeed(key)}
+                className={`text-xs px-3 py-1.5 rounded-lg border transition-colors ${
+                  speed === key
+                    ? 'bg-emerald-600 text-white border-emerald-600 font-semibold'
+                    : 'border-gray-200 text-gray-600 hover:border-emerald-300 hover:text-emerald-600 hover:bg-emerald-50'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Q2 선택 후 통계보기 버튼 등장 */}
+      {priceRange && speed && (
         <button
           type="button"
           onClick={handleStats}
