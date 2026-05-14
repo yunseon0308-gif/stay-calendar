@@ -36,7 +36,7 @@ type Stats = {
   priceCount: Record<string, number>;
   occupancyCount: Record<string, number>;
 };
-type Comment = { id: string; author: string; content: string; createdAt: string };
+type Comment = { id: string; author: string; content: string; createdAt: string; isSample?: boolean };
 
 interface Props { eventId: string; eventSlug: string; }
 
@@ -184,7 +184,14 @@ export default function EventStatsClient({ eventId, eventSlug }: Props) {
           {comments.map(c => (
             <div key={c.id} className="border-b border-gray-50 pb-4 last:border-0 last:pb-0">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-semibold text-gray-700">{c.author}</span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs font-semibold text-gray-700">{c.author}</span>
+                  {c.isSample && (
+                    <span className="text-[9px] font-medium text-gray-400 bg-gray-100 border border-gray-200 px-1.5 py-0.5 rounded-full leading-none">
+                      샘플
+                    </span>
+                  )}
+                </div>
                 <span className="text-[10px] text-gray-300">
                   {formatDistanceToNow(new Date(c.createdAt), { addSuffix: true, locale: ko })}
                 </span>

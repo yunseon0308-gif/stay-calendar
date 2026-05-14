@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { SAMPLE_EVENTS } from '@/lib/sampleEvents';
 
 type SurveyEntry = {
   eventId: string;
@@ -10,18 +11,24 @@ type SurveyEntry = {
 // In-memory store (resets on cold start — migrate to Supabase later)
 const store: Record<string, SurveyEntry[]> = {};
 
-// 시드 데이터: 페이지가 처음 열릴 때 사실적인 샘플 통계 제공
+// 제일 가까운 다가오는 행사 1개에만 시드 데이터 적용
+const _today = new Date();
+_today.setHours(0, 0, 0, 0);
+const SEED_EVENT_ID = SAMPLE_EVENTS
+  .filter(e => new Date(e.date_start) >= _today)
+  .sort((a, b) => a.date_start.localeCompare(b.date_start))[0]?.id ?? '';
+
 const SEED: { priceRange: string; occupancy: string }[] = [
-  { priceRange: '1.5-2',    occupancy: 'full' },
-  { priceRange: '2-3',      occupancy: 'full' },
-  { priceRange: '1.5-2',    occupancy: 'high' },
-  { priceRange: '1.2-1.5',  occupancy: 'high' },
-  { priceRange: '2-3',      occupancy: 'increased' },
-  { priceRange: '1.5-2',    occupancy: 'full' },
-  { priceRange: '3-5',      occupancy: 'full' },
-  { priceRange: '1.2-1.5',  occupancy: 'high' },
+  { priceRange: '1.5-2',    occupancy: 'super-fast' },
+  { priceRange: '2-3',      occupancy: 'super-fast' },
+  { priceRange: '1.5-2',    occupancy: 'fast' },
+  { priceRange: '1.2-1.5',  occupancy: 'fast' },
+  { priceRange: '2-3',      occupancy: 'normal' },
+  { priceRange: '1.5-2',    occupancy: 'super-fast' },
+  { priceRange: '3-5',      occupancy: 'super-fast' },
+  { priceRange: '1.2-1.5',  occupancy: 'fast' },
   { priceRange: 'under1.2', occupancy: 'normal' },
-  { priceRange: '2-3',      occupancy: 'full' },
+  { priceRange: '2-3',      occupancy: 'super-fast' },
 ];
 
 function seedFor(eventId: string): SurveyEntry[] {
@@ -33,7 +40,10 @@ function seedFor(eventId: string): SurveyEntry[] {
 }
 
 function getStore(eventId: string): SurveyEntry[] {
-  if (!store[eventId]) store[eventId] = seedFor(eventId);
+  if (!store[eventId]) {
+    // 가장 가까운 행사 1개에만 시드 적용, 나머지는 빈 배열
+    store[eventId] = eventId === SEED_EVENT_ID ? seedFor(eventId) : [];
+  }
   return store[eventId];
 }
 
