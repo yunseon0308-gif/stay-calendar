@@ -9,7 +9,7 @@ export type EventCategory =
 export const CATEGORY_LABEL: Record<EventCategory, string> = {
   concert:  '콘서트',
   festival: '축제',
-  fireworks:'불꽃놀이',
+  fireworks:'축제',
   sports:   '스포츠',
   esports:  '이스포츠',
   other:    '기타',

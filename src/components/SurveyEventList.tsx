@@ -38,11 +38,19 @@ export default function SurveyEventList() {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
+  const CAT_ORDER = ['concert','festival','fireworks','sports','esports','other'];
+  const byCat = (a: typeof SAMPLE_EVENTS[0], b: typeof SAMPLE_EVENTS[0]) => {
+    const ci = CAT_ORDER.indexOf(a.category) - CAT_ORDER.indexOf(b.category);
+    return ci !== 0 ? ci : a.date_start.localeCompare(b.date_start);
+  };
+
   const events   = SAMPLE_EVENTS.filter(e => e.slug);
-  const upcoming = events.filter(e => new Date(e.date_end) >= today)
-    .sort((a, b) => a.date_start.localeCompare(b.date_start));
+  const upcoming = events.filter(e => new Date(e.date_end) >= today).sort(byCat);
   const past     = events.filter(e => new Date(e.date_end) < today)
-    .sort((a, b) => b.date_start.localeCompare(a.date_start));
+    .sort((a, b) => {
+      const ci = CAT_ORDER.indexOf(a.category) - CAT_ORDER.indexOf(b.category);
+      return ci !== 0 ? ci : b.date_start.localeCompare(a.date_start);
+    });
 
   useEffect(() => {
     const ids = events.map(e => e.id).join(',');
@@ -60,7 +68,7 @@ export default function SurveyEventList() {
   const renderGrid = (list: typeof events) => {
     if (loading) {
       return (
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-4 gap-2">
           {Array.from({ length: 9 }).map((_, i) => (
             <div key={i} className="h-24 bg-gray-100 rounded-xl animate-pulse" />
           ))}
@@ -75,8 +83,8 @@ export default function SurveyEventList() {
 
     return (
       /* 3열 그리드, 3행 완전히 보이고 이후 스크롤 */
-      <div className="overflow-y-auto" style={{ maxHeight: '312px' }}>
-        <div className="grid grid-cols-3 gap-2">
+      <div className="overflow-y-auto" style={{ maxHeight: '308px' }}>
+        <div className="grid grid-cols-4 gap-2">
           {list.map(event => {
             const stats    = surveyMap[event.id];
             const total    = stats?.total ?? 0;
