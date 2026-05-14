@@ -671,8 +671,8 @@ export const SAMPLE_EVENTS: Event[] = [
     district: '장충',
     expected_visitors: 5000,
     impact: 3,
-    impact_basis: '동남아 팬덤 이동',
-    description: '배틀그라운드 국가대표 올스타전 · 서울 개최 확정 · 6일간',
-    source_url: 'https://esports.pubg.com/',
+    impact_basis: '24개국 글로벌 팬덤 이동',
+    description: '배틀그라운드 국가대표 올스타전 · 2019년 이후 7년 만의 서울 개최 · 24개국 참가 · 서바이벌 스테이지 6/23~24 · 그랜드 파이널 6/26~28',
+    source_url: 'https://pubg.com/ko/news/9993',
   },
 ];
