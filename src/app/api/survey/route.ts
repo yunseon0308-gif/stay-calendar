@@ -37,20 +37,30 @@ function getStore(eventId: string): SurveyEntry[] {
   return store[eventId];
 }
 
-export async function GET(req: NextRequest) {
-  const eventId = req.nextUrl.searchParams.get('eventId');
-  if (!eventId) return NextResponse.json({ error: 'eventId required' }, { status: 400 });
-
-  const entries = getStore(eventId);
-  const priceCount: Record<string, number>     = {};
+function buildStats(entries: SurveyEntry[]) {
+  const priceCount: Record<string, number>    = {};
   const occupancyCount: Record<string, number> = {};
-
   for (const e of entries) {
-    priceCount[e.priceRange]     = (priceCount[e.priceRange] || 0) + 1;
-    occupancyCount[e.occupancy]  = (occupancyCount[e.occupancy] || 0) + 1;
+    priceCount[e.priceRange]    = (priceCount[e.priceRange] || 0) + 1;
+    occupancyCount[e.occupancy] = (occupancyCount[e.occupancy] || 0) + 1;
+  }
+  return { total: entries.length, priceCount, occupancyCount };
+}
+
+export async function GET(req: NextRequest) {
+  // 다수 이벤트 일괄 조회: ?eventIds=id1,id2,...
+  const eventIds = req.nextUrl.searchParams.get('eventIds');
+  if (eventIds) {
+    const ids = eventIds.split(',').filter(Boolean);
+    const result: Record<string, ReturnType<typeof buildStats>> = {};
+    for (const id of ids) result[id] = buildStats(getStore(id));
+    return NextResponse.json(result);
   }
 
-  return NextResponse.json({ total: entries.length, priceCount, occupancyCount });
+  // 단일 이벤트 조회
+  const eventId = req.nextUrl.searchParams.get('eventId');
+  if (!eventId) return NextResponse.json({ error: 'eventId required' }, { status: 400 });
+  return NextResponse.json(buildStats(getStore(eventId)));
 }
 
 export async function POST(req: NextRequest) {

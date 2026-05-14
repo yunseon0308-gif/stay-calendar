@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import PastEventVotes from '@/components/PastEventVotes';
+import SurveyEventList from '@/components/SurveyEventList';
 
 const STATS_DATA = [
   {
@@ -164,10 +164,10 @@ export default function StatsPage() {
           ))}
         </div>
 
-        {/* ── 커뮤니티 투표 현황 (지난 행사) ─────────────────── */}
-        <h2 className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-2">📊 커뮤니티 투표 현황</h2>
-        <p className="text-xs text-gray-400 mb-4">지난 행사에서 호스트들이 직접 참여한 실제 단가 인상률 투표 결과입니다.</p>
-        <PastEventVotes />
+        {/* ── 운영자 실전 데이터 ─────────────────── */}
+        <h2 className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-2">🏆 운영자 실전 데이터</h2>
+        <p className="text-xs text-gray-400 mb-4">호스트들이 직접 등록한 단가 인상 및 예약 속도 데이터입니다. 클릭하면 상세 통계와 댓글을 볼 수 있어요.</p>
+        <SurveyEventList />
 
         {/* 하단 안내 */}
         <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-5 text-sm text-indigo-700 mt-10">
