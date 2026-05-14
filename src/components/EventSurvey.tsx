@@ -79,9 +79,16 @@ export default function EventSurvey({ eventId, eventSlug, onStats }: Props) {
       <p className="text-sm font-bold text-gray-800 mb-3">🏆 운영자 실전 데이터 등록</p>
 
       {/* Q1 */}
-      <p className="text-[11px] font-semibold text-gray-600 mb-2">
-        Q1. 평소 대비 단가를 얼마나 인상하셨나요?
-      </p>
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-[11px] font-semibold text-gray-600">
+          Q1. 평소 대비 단가를 얼마나 인상하셨나요?
+        </p>
+        {topPrice && (
+          <span className="text-[10px] font-semibold text-indigo-500 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-100 shrink-0 ml-2">
+            💰 {PRICE_LABELS[topPrice[0]] ?? topPrice[0]} {pct(topPrice[1], stats!.total)}%
+          </span>
+        )}
+      </div>
       <div className="flex flex-wrap gap-1.5 mb-4">
         {PRICE_OPTIONS.map(({ key, label }) => (
           <button key={key} type="button" onClick={() => setPriceRange(key)}
@@ -95,7 +102,14 @@ export default function EventSurvey({ eventId, eventSlug, onStats }: Props) {
 
       {/* Q2 */}
       <div className="mb-4">
-        <p className="text-[11px] font-semibold text-gray-600 mb-2">Q2. 예약이 언제쯤 찼나요?</p>
+        <div className="flex items-center justify-between mb-2">
+          <p className="text-[11px] font-semibold text-gray-600">Q2. 예약이 언제쯤 찼나요?</p>
+          {topSpeed && (
+            <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100 shrink-0 ml-2">
+              ⏰ {SPEED_LABELS[topSpeed[0]] ?? topSpeed[0]} {pct(topSpeed[1], stats!.total)}%
+            </span>
+          )}
+        </div>
         <div className="flex flex-wrap gap-1.5">
           {SPEED_OPTIONS.map(({ key, label }) => (
             <button key={key} type="button" onClick={() => setSpeed(key)}
@@ -108,7 +122,7 @@ export default function EventSurvey({ eventId, eventSlug, onStats }: Props) {
         </div>
       </div>
 
-      {/* 통계보기 버튼 — 항상 노출, 선택 완료 시 내용 전환 */}
+      {/* 통계보기 버튼 — 항상 노출 */}
       <button
         type="button"
         onClick={goToStats}
@@ -121,18 +135,10 @@ export default function EventSurvey({ eventId, eventSlug, onStats }: Props) {
       >
         {submitting ? (
           <span className="text-sm font-semibold">저장 중...</span>
-        ) : bothSelected && topPrice && topSpeed ? (
-          /* 선택 완료: 최다 득표 결과 미리보기 */
-          <div className="flex flex-col items-center gap-0.5">
-            <div className="flex items-center gap-3 text-xs font-semibold">
-              <span>💰 {PRICE_LABELS[topPrice[0]] ?? topPrice[0]} ({pct(topPrice[1], stats!.total)}%)</span>
-              <span className="text-indigo-200">|</span>
-              <span>⏰ {SPEED_LABELS[topSpeed[0]] ?? topSpeed[0]} ({pct(topSpeed[1], stats!.total)}%)</span>
-            </div>
-            <span className="text-[11px] text-indigo-200 font-medium">📊 상세 통계 보기 →</span>
-          </div>
         ) : (
-          <span className="text-sm font-semibold">📊 이 행사 통계 보기 →</span>
+          <span className="text-sm font-semibold">
+            📊 {bothSelected ? '내 선택 저장 + 상세 통계 보기 →' : '이 행사 통계 보기 →'}
+          </span>
         )}
       </button>
 
