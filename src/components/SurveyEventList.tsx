@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { SAMPLE_EVENTS } from '@/lib/sampleEvents';
 import { CATEGORY_LABEL, CATEGORY_LIGHT, CATEGORY_COLOR } from '@/types/event';
-import { ChevronRight } from 'lucide-react';
 
 const PRICE_LABELS: Record<string, string> = {
   'under1.2': '1.2배 미만',
@@ -58,79 +57,83 @@ export default function SurveyEventList() {
   const topKey = (count: Record<string, number>) =>
     Object.entries(count).sort((a, b) => b[1] - a[1])[0]?.[0];
 
-  const renderList = (list: typeof events) => {
+  const renderGrid = (list: typeof events) => {
     if (loading) {
       return (
-        <div className="space-y-2">
-          {[1,2,3].map(i => <div key={i} className="h-14 bg-gray-100 rounded-xl animate-pulse" />)}
+        <div className="grid grid-cols-3 gap-2">
+          {Array.from({ length: 9 }).map((_, i) => (
+            <div key={i} className="h-24 bg-gray-100 rounded-xl animate-pulse" />
+          ))}
         </div>
       );
     }
     if (list.length === 0) {
       return (
-        <div className="text-center py-6 text-sm text-gray-400">해당하는 행사가 없어요.</div>
+        <div className="text-center py-8 text-sm text-gray-400">해당하는 행사가 없어요.</div>
       );
     }
+
     return (
-      /* 3개 높이 고정, 세로 스크롤 */
-      <div className="overflow-y-auto max-h-[228px] space-y-2 pr-1">
-        {list.map(event => {
-          const stats    = surveyMap[event.id];
-          const total    = stats?.total ?? 0;
-          const topPrice = stats ? topKey(stats.priceCount) : null;
-          const topSpeed = stats ? topKey(stats.occupancyCount) : null;
-          const isPast   = new Date(event.date_end) < today;
-          const daysLeft = Math.ceil(
-            (new Date(event.date_start).getTime() - today.getTime()) / 86400000
-          );
+      /* 3열 그리드, 3행 완전히 보이고 이후 스크롤 */
+      <div className="overflow-y-auto" style={{ maxHeight: '312px' }}>
+        <div className="grid grid-cols-3 gap-2">
+          {list.map(event => {
+            const stats    = surveyMap[event.id];
+            const total    = stats?.total ?? 0;
+            const topPrice = stats ? topKey(stats.priceCount) : null;
+            const topSpeed = stats ? topKey(stats.occupancyCount) : null;
+            const isPast   = new Date(event.date_end) < today;
+            const daysLeft = Math.ceil(
+              (new Date(event.date_start).getTime() - today.getTime()) / 86400000
+            );
 
-          return (
-            <Link
-              key={event.id}
-              href={`/event/${event.slug}/stats`}
-              className="flex items-start gap-3 bg-white border border-gray-100 rounded-xl p-3 hover:border-indigo-200 hover:shadow-sm transition-all"
-            >
-              {/* 카테고리 컬러 바 */}
-              <div
-                className={`w-1.5 rounded-full shrink-0 mt-0.5 ${CATEGORY_COLOR[event.category]}`}
-                style={{ minHeight: '44px' }}
-              />
+            return (
+              <Link
+                key={event.id}
+                href={`/event/${event.slug}/stats`}
+                className="bg-white border border-gray-100 rounded-xl overflow-hidden hover:border-indigo-200 hover:shadow-sm transition-all flex flex-col"
+              >
+                {/* 상단 컬러 바 */}
+                <div className={`h-1 shrink-0 ${CATEGORY_COLOR[event.category]}`} />
 
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-1.5 mb-0.5 flex-wrap">
-                  <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${CATEGORY_LIGHT[event.category]}`}>
-                    {CATEGORY_LABEL[event.category]}
-                  </span>
+                <div className="p-2.5 flex flex-col gap-1 flex-1">
+                  {/* 카테고리 + D-N */}
+                  <div className="flex items-center justify-between gap-1">
+                    <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded-full border leading-none ${CATEGORY_LIGHT[event.category]}`}>
+                      {CATEGORY_LABEL[event.category]}
+                    </span>
+                    {isPast ? (
+                      <span className="text-[9px] text-gray-400 font-medium leading-none">종료</span>
+                    ) : (
+                      <span className="text-[9px] font-bold text-indigo-600 leading-none">D-{daysLeft}</span>
+                    )}
+                  </div>
+
+                  {/* 제목 */}
+                  <p className="text-xs font-semibold text-gray-800 leading-tight line-clamp-2">{event.title}</p>
+
+                  {/* 날짜 */}
+                  <p className="text-[10px] text-gray-400 leading-none">{event.date_start}</p>
+
+                  {/* 단가 + 속도 */}
                   {topPrice && PRICE_LABELS[topPrice] && (
-                    <span className="text-[10px] font-semibold text-indigo-600 bg-indigo-50 border border-indigo-100 px-1.5 py-0.5 rounded-full">
-                      {PRICE_LABELS[topPrice]}
+                    <span className="text-[9px] font-semibold text-indigo-600 leading-none">
+                      💰 {PRICE_LABELS[topPrice]}
                     </span>
                   )}
                   {topSpeed && SPEED_LABELS[topSpeed] && (
-                    <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 border border-emerald-100 px-1.5 py-0.5 rounded-full">
-                      {SPEED_LABELS[topSpeed]}
+                    <span className="text-[9px] font-semibold text-emerald-600 leading-none">
+                      ⚡ {SPEED_LABELS[topSpeed]}
                     </span>
                   )}
-                </div>
-                <p className="text-sm font-semibold text-gray-800 truncate leading-tight">{event.title}</p>
-                <p className="text-xs text-gray-400 mt-0.5 truncate">
-                  {event.date_start} · {event.district ? `${event.location}/${event.district}` : event.location}
-                </p>
-              </div>
 
-              {/* 우측 */}
-              <div className="shrink-0 flex flex-col items-end gap-1">
-                {isPast ? (
-                  <span className="text-[10px] text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full font-medium">종료</span>
-                ) : (
-                  <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">D-{daysLeft}</span>
-                )}
-                <span className="text-[10px] text-gray-400">{total}명</span>
-                <ChevronRight size={12} className="text-gray-300" />
-              </div>
-            </Link>
-          );
-        })}
+                  {/* 참여수 */}
+                  <p className="text-[9px] text-gray-300 leading-none mt-auto">{total}명 참여</p>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </div>
     );
   };
@@ -167,7 +170,7 @@ export default function SurveyEventList() {
         </button>
       </div>
 
-      {activeTab === 'upcoming' ? renderList(upcoming) : renderList(past)}
+      {activeTab === 'upcoming' ? renderGrid(upcoming) : renderGrid(past)}
     </div>
   );
 }
