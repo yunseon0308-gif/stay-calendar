@@ -15,9 +15,10 @@ const PRICE_OPTIONS = [
 interface Props {
   eventId: string;
   eventSlug: string;
+  onStats?: () => void; // 모달에서 호출 시 모달 닫힘 처리용
 }
 
-export default function EventSurvey({ eventId, eventSlug }: Props) {
+export default function EventSurvey({ eventId, eventSlug, onStats }: Props) {
   const router = useRouter();
   const [priceRange, setPriceRange] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -34,7 +35,11 @@ export default function EventSurvey({ eventId, eventSlug }: Props) {
     } catch {
       // ignore
     }
-    router.push(`/event/${eventSlug}/stats`);
+    if (onStats) {
+      onStats();
+    } else {
+      router.push(`/event/${eventSlug}/stats`);
+    }
   };
 
   return (

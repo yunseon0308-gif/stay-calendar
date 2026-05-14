@@ -141,15 +141,17 @@ export default function EventModal({ event }: { event: Event }) {
                   ? '중형 행사. 행사 1개월 전 조정을 추천해요.'
                   : '소규모 수요 증가. 행사 1~2주 전 확인하세요.'}
               </p>
-              {priceRec && (
-                <p className="mt-1.5 text-sm font-bold text-indigo-800">
-                  👉 추천 인상률: <span className="text-emerald-700">{priceRec}</span>
-                </p>
-              )}
             </div>
           )}
 
-          <EventSurvey eventId={event.id} eventSlug={event.slug ?? event.id} />
+          <EventSurvey
+            eventId={event.id}
+            eventSlug={event.slug ?? event.id}
+            onStats={() => {
+              document.body.style.overflow = '';
+              router.push(`/event/${event.slug ?? event.id}/stats`);
+            }}
+          />
 
           <div className="flex gap-2 mt-5">
             {event.source_url && (
