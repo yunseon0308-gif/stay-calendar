@@ -12,7 +12,7 @@ import {
   CATEGORY_COLOR,
   getPriceRecommendation,
 } from '@/types/event';
-import EventVoting from '@/components/EventVoting';
+import EventSurvey from '@/components/EventSurvey';
 
 const SITE_URL = 'https://stay-calendar.vercel.app';
 
@@ -267,9 +267,9 @@ export default async function EventPage({
             )}
           </div>
 
-          {/* 투표 — 클라이언트 컴포넌트 */}
+          {/* 운영자 실전 데이터 등록 */}
           <div className="mt-6">
-            <EventVoting eventId={event.id} />
+            <EventSurvey eventId={event.id} eventSlug={event.slug ?? event.id} />
           </div>
 
           {/* 외부 링크 */}

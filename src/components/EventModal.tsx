@@ -6,7 +6,7 @@ import { format, parseISO } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { X, MapPin, Calendar, Users, TrendingUp, ExternalLink } from 'lucide-react';
 import { Event, CATEGORY_LABEL, CATEGORY_LIGHT, getPriceRecommendation, getImpactBasis } from '@/types/event';
-import EventVoting from '@/components/EventVoting';
+import EventSurvey from '@/components/EventSurvey';
 
 export default function EventModal({ event }: { event: Event }) {
   const router = useRouter();
@@ -147,7 +147,7 @@ export default function EventModal({ event }: { event: Event }) {
             </div>
           )}
 
-          <EventVoting eventId={event.id} />
+          <EventSurvey eventId={event.id} eventSlug={event.slug ?? event.id} />
 
           <div className="flex gap-2 mt-5">
             {event.source_url && (
