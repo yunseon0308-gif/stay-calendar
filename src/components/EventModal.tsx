@@ -116,7 +116,7 @@ export default function EventModal({ event }: { event: Event }) {
                     <span key={i} className={`text-sm ${i <= event.impact! ? 'text-yellow-400' : 'text-gray-200'}`}>★</span>
                   ))}
                 </span>
-                <span className="text-xs text-gray-500">{getImpactBasis(event.impact)}</span>
+                <span className="text-xs text-gray-500">{event.impact_basis ?? getImpactBasis(event.impact)}</span>
               </div>
             )}
           </div>
