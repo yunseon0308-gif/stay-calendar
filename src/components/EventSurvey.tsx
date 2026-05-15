@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 const PRICE_OPTIONS = [
-  { key: 'down',     label: '인하' },
   { key: 'flat',     label: '동결' },
   { key: 'under1.2', label: '1.2배 미만' },
   { key: '1.2-1.5',  label: '1.2~1.5배' },

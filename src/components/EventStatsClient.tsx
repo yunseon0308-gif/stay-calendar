@@ -38,7 +38,7 @@ const OCCUPANCY_LABELS: Record<string, string> = {
   'unknown':    '-',
 };
 
-const PRICE_ORDER     = ['down','flat','under1.2','1.2-1.5','1.5-2','2-3','3-5','over5'];
+const PRICE_ORDER     = ['flat','under1.2','1.2-1.5','1.5-2','2-3','3-5','over5'];
 const OCCUPANCY_ORDER = ['3m','2m','1m','2w','1w'];
 
 type Stats = {
