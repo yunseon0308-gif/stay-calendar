@@ -23,7 +23,7 @@ interface Comment {
   created_at: string;
 }
 
-const ADMIN_EMAIL = 'cinemomo@naver.com';
+const ADMIN_EMAIL = 'llstaycall@gmail.com';
 
 function timeAgo(dateStr: string): string {
   const diff = Date.now() - new Date(dateStr).getTime();

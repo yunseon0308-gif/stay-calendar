@@ -92,8 +92,8 @@ export default function PrivacyPage() {
               <li>책임자: 스테이달력 운영자</li>
               <li>
                 이메일:{' '}
-                <a href="mailto:cinemomo@naver.com" className="text-indigo-600 underline">
-                  cinemomo@naver.com
+                <a href="mailto:llstaycall@gmail.com" className="text-indigo-600 underline">
+                  llstaycall@gmail.com
                 </a>
               </li>
             </ul>
