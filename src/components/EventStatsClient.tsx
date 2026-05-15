@@ -9,12 +9,14 @@ import { Trash2 } from 'lucide-react';
 const MY_COMMENTS_KEY = 'my_comment_ids';
 
 const PRICE_LABELS: Record<string, string> = {
+  'down':     '인하',
+  'flat':     '동결',
   'under1.2': '1.2배 미만',
   '1.2-1.5':  '1.2~1.5배',
   '1.5-2':    '1.5~2배',
   '2-3':      '2~3배',
   '3-5':      '3~5배',
-  'over5':    '5배 이상',
+  'over5':    '5배 이상', // 구버전 호환
 };
 
 const OCCUPANCY_LABELS: Record<string, string> = {
@@ -36,7 +38,7 @@ const OCCUPANCY_LABELS: Record<string, string> = {
   'unknown':    '-',
 };
 
-const PRICE_ORDER     = ['under1.2','1.2-1.5','1.5-2','2-3','3-5','over5'];
+const PRICE_ORDER     = ['down','flat','under1.2','1.2-1.5','1.5-2','2-3','3-5','over5'];
 const OCCUPANCY_ORDER = ['3m','2m','1m','2w','1w'];
 
 type Stats = {

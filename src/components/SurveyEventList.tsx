@@ -6,12 +6,14 @@ import { SAMPLE_EVENTS } from '@/lib/sampleEvents';
 import { CATEGORY_LABEL, CATEGORY_LIGHT, CATEGORY_COLOR } from '@/types/event';
 
 const PRICE_LABELS: Record<string, string> = {
+  'down':     '인하',
+  'flat':     '동결',
   'under1.2': '1.2배 미만',
   '1.2-1.5':  '1.2~1.5배',
   '1.5-2':    '1.5~2배',
   '2-3':      '2~3배',
   '3-5':      '3~5배',
-  'over5':    '5배 이상',
+  'over5':    '5배 이상', // 구버전 호환
 };
 
 const SPEED_LABELS: Record<string, string> = {

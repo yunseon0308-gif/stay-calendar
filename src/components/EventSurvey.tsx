@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 const PRICE_OPTIONS = [
+  { key: 'down',     label: '인하' },
+  { key: 'flat',     label: '동결' },
   { key: 'under1.2', label: '1.2배 미만' },
   { key: '1.2-1.5',  label: '1.2~1.5배' },
   { key: '1.5-2',    label: '1.5~2배' },
   { key: '2-3',      label: '2~3배' },
   { key: '3-5',      label: '3~5배' },
-  { key: 'over5',    label: '5배 이상' },
 ];
 
 const SPEED_OPTIONS = [
@@ -21,8 +22,10 @@ const SPEED_OPTIONS = [
 ];
 
 const PRICE_LABELS: Record<string, string> = {
+  'down': '인하', 'flat': '동결',
   'under1.2': '1.2배 미만', '1.2-1.5': '1.2~1.5배',
-  '1.5-2': '1.5~2배', '2-3': '2~3배', '3-5': '3~5배', 'over5': '5배 이상',
+  '1.5-2': '1.5~2배', '2-3': '2~3배', '3-5': '3~5배',
+  'over5': '5배 이상', // 구버전 호환
 };
 const SPEED_LABELS: Record<string, string> = {
   '3m': '3개월 전', '2m': '2개월 전', '1m': '1개월 전', '2w': '2주 전', '1w': '1주 전',
