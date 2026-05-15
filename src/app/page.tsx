@@ -55,8 +55,8 @@ export default function Home() {
 
       <main className="max-w-7xl mx-auto px-4 py-6">
 
-        {/* 소개 */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm mb-6">
+        {/* 소개 — 모바일에서는 숨김 (스크롤 길이 단축, 달력 우선 노출) */}
+        <div className="hidden md:block bg-white rounded-2xl border border-gray-100 p-4 shadow-sm mb-6">
           <h2 className="text-sm font-bold text-gray-800 mb-1.5">📌 스테이달력이란?</h2>
           <p className="text-xs text-gray-500 leading-relaxed">
             공연·축제·불꽃놀이 등 대형 행사 일정을 한눈에 볼 수 있는 공유숙박업주 전용 캘린더입니다.
