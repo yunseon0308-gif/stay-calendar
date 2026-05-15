@@ -51,7 +51,7 @@ export default function SubscribePage() {
         {/* 페이지 타이틀 */}
         <div className="text-center mb-8">
           <h1 className="text-2xl font-black text-gray-800 mb-2">🔔 행사 알림 구독</h1>
-          <p className="text-sm text-gray-500">내 숙소 근처 대형 행사 일정을 이메일로 미리 받아보세요.</p>
+          <p className="text-sm text-gray-500">매월 말일, 다음 달 대형 행사 일정을 이메일로 일괄 받아보세요.</p>
         </div>
 
         {/* 폼 카드 */}
@@ -133,9 +133,10 @@ export default function SubscribePage() {
         <div className="mt-6 bg-indigo-50 border border-indigo-100 rounded-2xl p-4 text-xs text-indigo-700 leading-relaxed">
           <p className="font-semibold mb-1">📌 알림 구독 안내</p>
           <ul className="list-disc list-inside space-y-1 text-indigo-600">
-            <li>행사 1~2개월 전 이메일 알림을 발송합니다.</li>
+            <li>매월 말일, 다음 달 대형 행사 알림을 일괄 발송합니다.</li>
+            <li>지역 기반 필터링 — 선택한 지역의 행사만 보내드려요.</li>
             <li>구독자 개인정보는 알림 발송 목적으로만 사용됩니다.</li>
-            <li>언제든지 수신 거부하실 수 있습니다.</li>
+            <li>수신 거부: 메일 하단 「수신거부」 링크 또는 <a href="mailto:llstaycall@gmail.com?subject=수신거부 요청" className="underline">llstaycall@gmail.com</a>으로 회신해주세요.</li>
           </ul>
         </div>
       </main>
