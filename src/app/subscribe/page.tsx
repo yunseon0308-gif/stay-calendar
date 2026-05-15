@@ -134,7 +134,6 @@ export default function SubscribePage() {
           <p className="font-semibold mb-1">📌 알림 구독 안내</p>
           <ul className="list-disc list-inside space-y-1 text-indigo-600">
             <li>매월 말일, 다음 달 행사 알림을 발송드립니다.</li>
-            <li>지역 기반 필터링 — 선택한 지역의 행사만 보내드려요.</li>
             <li>구독자 개인정보는 알림 발송 목적으로만 사용됩니다.</li>
             <li>수신 거부: <a href="mailto:llstaycall@gmail.com?subject=수신거부 요청" className="underline">llstaycall@gmail.com</a>으로 회신해주세요.</li>
           </ul>
