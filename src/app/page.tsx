@@ -46,6 +46,14 @@ export default function Home() {
             관리자
           </Link>
         </div>
+
+        {/* 모바일 전용 탭 네비게이션 */}
+        <nav className="md:hidden flex items-center border-t border-gray-100 text-sm font-medium">
+          <Link href="/" className="flex-1 text-center py-2.5 text-indigo-700 font-bold border-b-2 border-indigo-600">달력</Link>
+          <Link href="/community" className="flex-1 text-center py-2.5 text-gray-500 hover:text-indigo-600 transition-colors">커뮤니티</Link>
+          <Link href="/subscribe" className="flex-1 text-center py-2.5 text-gray-500 hover:text-indigo-600 transition-colors">알림신청</Link>
+          <Link href="/stats" className="flex-1 text-center py-2.5 text-gray-500 hover:text-indigo-600 transition-colors">통계</Link>
+        </nav>
       </header>
 
       {/* 상단 안내 배너 */}
