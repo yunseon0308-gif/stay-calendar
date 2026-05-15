@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import Link from 'next/link';
 import Calendar from '@/components/Calendar';
 import LocationFilter from '@/components/LocationFilter';
 import UpcomingEvents from '@/components/UpcomingEvents';
+import SiteHeader from '@/components/SiteHeader';
 import { SAMPLE_EVENTS } from '@/lib/sampleEvents';
 
 export default function Home() {
@@ -25,36 +25,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* 헤더 */}
-      <header className="bg-white border-b border-gray-100 sticky top-0 z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-black text-indigo-700 tracking-tight">
-              🏨 스테이달력
-            </h1>
-            <p className="text-xs text-gray-400 mt-0.5">공유숙박업 단가관리 필수 행사 캘린더</p>
-          </div>
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
-            <Link href="/" className="text-indigo-700 font-bold">달력</Link>
-            <Link href="/community" className="hover:text-indigo-600 transition-colors">커뮤니티</Link>
-            <Link href="/subscribe" className="hover:text-indigo-600 transition-colors">알림신청</Link>
-            <Link href="/stats" className="hover:text-indigo-600 transition-colors">통계</Link>
-          </nav>
-          <Link
-            href="/admin"
-            className="text-xs text-gray-500 hover:text-indigo-600 border border-gray-200 px-3 py-1.5 rounded-lg hover:border-indigo-300 transition-colors"
-          >
-            관리자
-          </Link>
-        </div>
-
-        {/* 모바일 전용 탭 네비게이션 */}
-        <nav className="md:hidden flex items-center border-t border-gray-100 text-sm font-medium">
-          <Link href="/" className="flex-1 text-center py-2.5 text-indigo-700 font-bold border-b-2 border-indigo-600">달력</Link>
-          <Link href="/community" className="flex-1 text-center py-2.5 text-gray-500 hover:text-indigo-600 transition-colors">커뮤니티</Link>
-          <Link href="/subscribe" className="flex-1 text-center py-2.5 text-gray-500 hover:text-indigo-600 transition-colors">알림신청</Link>
-          <Link href="/stats" className="flex-1 text-center py-2.5 text-gray-500 hover:text-indigo-600 transition-colors">통계</Link>
-        </nav>
-      </header>
+      <SiteHeader active="calendar" />
 
       {/* 상단 안내 배너 */}
       <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 text-center text-sm">

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import SiteHeader from '@/components/SiteHeader';
 
 const LOCATIONS = ['서울', '부산', '인천', '대구', '대전', '광주', '울산', '수원', '고양', '기타'];
 
@@ -44,26 +45,7 @@ export default function SubscribePage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* 헤더 */}
-      <header className="bg-white border-b border-gray-100 sticky top-0 z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex flex-col">
-            <span className="text-xl font-black text-indigo-700 tracking-tight">🏨 스테이달력</span>
-            <span className="text-xs text-gray-400 mt-0.5">공유숙박업 단가관리 필수 행사 캘린더</span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
-            <Link href="/" className="hover:text-indigo-600 transition-colors">달력</Link>
-            <Link href="/community" className="hover:text-indigo-600 transition-colors">커뮤니티</Link>
-            <Link href="/subscribe" className="text-indigo-700 font-bold">알림신청</Link>
-            <Link href="/stats" className="hover:text-indigo-600 transition-colors">통계</Link>
-          </nav>
-          <Link
-            href="/admin"
-            className="text-xs text-gray-500 hover:text-indigo-600 border border-gray-200 px-3 py-1.5 rounded-lg hover:border-indigo-300 transition-colors"
-          >
-            관리자
-          </Link>
-        </div>
-      </header>
+      <SiteHeader active="subscribe" />
 
       <main className="max-w-2xl mx-auto px-4 py-10">
         {/* 페이지 타이틀 */}
