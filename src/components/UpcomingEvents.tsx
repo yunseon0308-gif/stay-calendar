@@ -23,9 +23,9 @@ export default function UpcomingEvents({ events, selectedLocation }: Props) {
 
   const upcoming = events
     .filter((e) => {
-      const end   = parseISO(e.date_end);
       const start = parseISO(e.date_start);
-      if (end < today) return false;
+      // D-day(오늘 시작) 및 이미 시작된 행사는 사이드바에서 제외 — 미래 일정만 노출
+      if (start <= today) return false;
       if (start > in365days) return false;
       if (selectedLocation !== '전체' && e.location !== selectedLocation) return false;
       return true;
